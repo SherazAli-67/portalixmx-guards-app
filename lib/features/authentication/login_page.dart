@@ -4,6 +4,7 @@ import '../../res/app_textstyles.dart';
 import '../../widgets/app_textfield_widget.dart';
 import '../../widgets/bg_logo_screen.dart';
 import '../../widgets/primary_btn.dart';
+import '../main_menu/main_menu_page.dart';
 import 'otp_page.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -34,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 50,
               width: double.infinity,
               child: PrimaryBtn(onTap: (){
-                // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> MainMenuPage()), (val)=> false);
+                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> MainMenuPage()), (val)=> false);
               }, btnText: "Log in"),
             ),
             TextButton(onPressed: (){
