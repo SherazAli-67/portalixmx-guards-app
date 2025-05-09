@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:portalixmx_guards_app/features/main_menu/visitors/add_visitor_page.dart';
+import 'package:portalixmx_guards_app/features/main_menu/visitors/logs_page.dart';
 import 'package:portalixmx_guards_app/features/main_menu/visitors/scan_qr_code_page.dart';
 import 'package:portalixmx_guards_app/res/app_icons.dart';
 
@@ -68,7 +69,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const SizedBox(height: 20,),
                 Expanded(
-                  child: ListView.builder(
+                  child: _selecteedTab == 0 ?
+                  ListView.builder(
                       itemCount: 3,
                       itemBuilder: (ctx, index){
                         return Card(
@@ -87,7 +89,9 @@ class _HomePageState extends State<HomePage> {
             
                           ),
                         );
-                      }),
+                      })
+                  : LogsPage()
+                  ,
                 )
               ],
             ),
