@@ -7,6 +7,8 @@ class AppIcons {
   static const icMenu = 'assets/icons/ic_menu.svg';
   static const icAdd = 'assets/icons/ic_add.svg';
   static const icScanner = 'assets/icons/ic_scanner.svg';
+  static const icLogsIn = 'assets/icons/ic_logs_in.svg';
+  static const icLogsOut = 'assets/icons/ic_logs_out.svg';
 
 
 
