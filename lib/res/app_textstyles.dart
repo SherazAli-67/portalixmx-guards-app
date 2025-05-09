@@ -17,5 +17,4 @@ class AppTextStyles {
   static final TextStyle editProfileHeadingTextStyle = TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: AppColors.btnColorDark);
   static final TextStyle editProfileSubHeadingTextStyle = TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.black);
   static final TextStyle emergencyContactTitleTextStyle = TextStyle(fontSize: 10, fontWeight: FontWeight.w400, color: Color(0xff7C7C7C));
-
 }

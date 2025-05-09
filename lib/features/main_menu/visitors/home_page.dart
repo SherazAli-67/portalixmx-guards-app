@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:portalixmx_guards_app/features/main_menu/visitors/add_visitor_page.dart';
+import 'package:portalixmx_guards_app/features/main_menu/visitors/scan_qr_code_page.dart';
 import 'package:portalixmx_guards_app/res/app_icons.dart';
 
-import '../../res/app_colors.dart';
-import '../../res/app_textstyles.dart';
+import '../../../res/app_colors.dart';
+import '../../../res/app_textstyles.dart';
 
 class HomePage extends StatefulWidget{
   const HomePage({super.key});
@@ -95,9 +97,14 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 spacing: 10,
                 children: [
-                  _buildFAB(icon: AppIcons.icScanner, onTap: (){}),
-                  _buildFAB(icon: AppIcons.icAdd, onTap: (){}),
+                  _buildFAB(icon: AppIcons.icScanner, onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> ScanQRCodePage()));
+                  }),
+                  _buildFAB(icon: AppIcons.icAdd, onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> AddVisitorPage()));
+                  }),
                 ],
+
               )
             )
           ],
@@ -108,6 +115,7 @@ class _HomePageState extends State<HomePage> {
 
   FloatingActionButton _buildFAB({required String icon, required VoidCallback onTap}) {
     return FloatingActionButton(
+      heroTag: icon,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(99),
         ),
@@ -115,5 +123,4 @@ class _HomePageState extends State<HomePage> {
         onPressed: onTap,
         child: SvgPicture.asset(icon));
   }
-
 }
