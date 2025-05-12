@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:portalixmx_guards_app/features/main_menu/visitors/visitor_added_summary_page.dart';
+import 'package:portalixmx_guards_app/features/main_menu/visitors/guest_verified_page.dart';
 import 'package:portalixmx_guards_app/widgets/bg_gradient_screen.dart';
 import '../../../res/app_textstyles.dart';
 import '../../../widgets/primary_btn.dart';
@@ -19,6 +18,7 @@ class _ScanQRCodePageState extends State<ScanQRCodePage> with WidgetsBindingObse
   bool _isScanning = false;
   StreamSubscription? _scanSubscription;
   bool _isControllerInitialized = false;
+  bool _hasScanned = false; // Add this to your state
 
   @override
   void initState() {
@@ -97,6 +97,38 @@ class _ScanQRCodePageState extends State<ScanQRCodePage> with WidgetsBindingObse
   }
 
   void _startScanning() {
+    if (_isScanning || _hasScanned) return;
+    _isScanning = true;
+
+    _scanSubscription = cameraController.barcodes.listen((capture) {
+      if (capture.barcodes.isNotEmpty && !_hasScanned) {
+        _hasScanned = true;
+        _foundBarcode(capture.barcodes.first);
+      }
+    });
+  }
+
+  void _foundBarcode(Barcode barcode) async {
+    debugPrint("Barcode found: ${barcode.displayValue}");
+    _stopScanning(); // cancel the stream subscription
+    _disposeController();
+
+    if (barcode.format == BarcodeFormat.qrCode) {
+      await Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => GuestVerifiedPage()),
+      );
+      _hasScanned = false;
+      _initializeController(); // restart scanner after returning
+    }
+  }
+
+  void _stopScanning() {
+    _isScanning = false;
+    _scanSubscription?.cancel();
+    _scanSubscription = null;
+  }
+ /* void _startScanning() {
     if (_isScanning) return;
     _isScanning = true;
     _scanSubscription = cameraController.barcodes.listen((capture) {
@@ -114,14 +146,32 @@ class _ScanQRCodePageState extends State<ScanQRCodePage> with WidgetsBindingObse
   }
 
   void _foundBarcode(Barcode barcode) async {
-    debugPrint("Barcode found");
+    *//*debugPrint("Barcode found");
     if (!_isScanning) return; // Ignore if we're not supposed to be scanning
-
     _stopScanning();
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> VisitorAddedSummaryPage()));
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> GuestVerifiedPage()));
 
+    await HapticFeedback.vibrate();*//*
+    debugPrint("Barcode found 1 is Scanning: $_isScanning");
+    _disposeController();
+    debugPrint("After dispose: $_isScanning");
+   *//* if (!_isScanning) return; // Ignore if we're not supposed to be scanning
+    debugPrint("Barcode found 2 is Scanning: $_isScanning");
+    _stopScanning();
+
+    debugPrint("Barcode found 3 is Scanning: $_isScanning");
     await HapticFeedback.vibrate();
-  }
+
+    debugPrint("Barcode found 4 is Scanning: $_isScanning");*//*
+    if(barcode.format == BarcodeFormat.qrCode){
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => GuestVerifiedPage()),
+      ).then((_) {
+        _startScanning();
+      });
+    }
+  }*/
 
   @override
   Widget build(BuildContext context) {

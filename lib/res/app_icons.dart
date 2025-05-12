@@ -9,6 +9,7 @@ class AppIcons {
   static const icScanner = 'assets/icons/ic_scanner.svg';
   static const icLogsIn = 'assets/icons/ic_logs_in.svg';
   static const icLogsOut = 'assets/icons/ic_logs_out.svg';
+  static const icGuestVerified  ='assets/icons/ic_guest_verified.svg';
 
 
 

@@ -45,10 +45,10 @@ class VisitorDetailPage extends StatelessWidget{
                         spacing: 20,
                         children: [
                           Expanded(
-                            child: VisitorInfoItemWidget(title: 'REQUESTED TIME', subTitle: 'Sep 20, 10:00 AM', showDivider: true),
+                            child: VisitorInfoItemWidget(title: 'APARTMENT NAME', subTitle: 'Fatima Heights', showDivider: true),
                           ),
                           Expanded(
-                              child: VisitorInfoItemWidget(title: 'ACCESS FOR', subTitle: 'Teacher',  showDivider: true)
+                              child: VisitorInfoItemWidget(title: 'Contact No', subTitle: '+91 12345678', showDivider: true,)
                           ),
                         ],
                       ),
@@ -57,10 +57,10 @@ class VisitorDetailPage extends StatelessWidget{
                         spacing: 20,
                         children: [
                           Expanded(
-                            child: VisitorInfoItemWidget(title: 'Access Approved Date', subTitle: 'Sep 20, 2024', ),
+                            child: VisitorInfoItemWidget(title: 'DATE', subTitle: 'Sep 20, 2024', ),
                           ),
                           Expanded(
-                              child: VisitorInfoItemWidget(title: 'Contact No', subTitle: '+91 12345678',)
+                              child: VisitorInfoItemWidget(title: 'TIME', subTitle: '10:00AM - 06:00PM',)
                           ),
                         ],
                       ),
@@ -88,9 +88,7 @@ class VisitorDetailPage extends StatelessWidget{
                             );
                           })
                       ),
-                      Text("QR CODE", style: AppTextStyles.visitorDetailTitleTextStyle,),
-                      // Image.asset(AppIcons.icQRCode),
-                      const SizedBox(height: 20,),
+                      const SizedBox(height: 40,),
                       SizedBox(
                         height: 50,
                         width: double.infinity,

@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:portalixmx_guards_app/features/main_menu/visitors/add_visitor_page.dart';
 import 'package:portalixmx_guards_app/features/main_menu/visitors/logs_page.dart';
 import 'package:portalixmx_guards_app/features/main_menu/visitors/scan_qr_code_page.dart';
+import 'package:portalixmx_guards_app/features/main_menu/visitors/scanner_page.dart';
 import 'package:portalixmx_guards_app/res/app_icons.dart';
 
 import '../../../res/app_colors.dart';

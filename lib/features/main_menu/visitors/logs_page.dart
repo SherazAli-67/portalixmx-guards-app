@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:portalixmx_guards_app/app_data/app_data.dart';
+import 'package:portalixmx_guards_app/features/main_menu/visitors/visitor_detail_page.dart';
 import 'package:portalixmx_guards_app/models/log_user_model.dart';
 import 'package:portalixmx_guards_app/res/app_icons.dart';
 import 'package:portalixmx_guards_app/res/app_textstyles.dart';
@@ -61,17 +62,20 @@ class LogsItemWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(15)
         ),
         child: ListTile(
+          onTap: (){
+            Navigator.of(context).push(MaterialPageRoute(builder: (_)=> VisitorDetailPage()));
+          },
           contentPadding: EdgeInsets.only(left: 10),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15)
           ),
           tileColor: Colors.white,
           leading: CircleAvatar(
-            backgroundImage: CachedNetworkImageProvider(AppIcons.icUser2),
+            backgroundImage: CachedNetworkImageProvider(item.imageUrl, errorListener: (val){}),
           ),
           title: Text(item.name, style: AppTextStyles.tileTitleTextStyle,),
           subtitle: Text(item.dateTime.formatDate(), style: AppTextStyles.tileSubtitleTextStyle,),
-          trailing: IconButton(onPressed: (){}, icon: SvgPicture.asset(AppIcons.icLogsIn, height: 20,)),
+          trailing: IconButton(onPressed: (){}, icon: SvgPicture.asset(AppIcons.icLogsOut, height: 20,)),
         ),
       ),
     );
