@@ -19,7 +19,7 @@ class SecurityAlertPage extends StatelessWidget{
                 itemCount: 10,
                 itemBuilder: (ctx, index){
                   return Card(
-                    margin: EdgeInsets.only(bottom: 10),
+                    margin: EdgeInsets.only(bottom: 13),
                     child: ListTile(
                       // onTap: ()=> Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> VisitorDetailPage())),
                       contentPadding: EdgeInsets.only(left: 10),
