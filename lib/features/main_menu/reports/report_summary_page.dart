@@ -58,33 +58,4 @@ class ReportSummaryPage extends StatelessWidget{
         ));
   }
 
-/* void _showEditBottomSheet(BuildContext context){
-     showModalBottomSheet(
-         backgroundColor: Colors.white,
-         context: context, builder: (ctx){
-       return Padding(
-         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 35),
-         child: Column(
-           mainAxisSize: MainAxisSize.min,
-           spacing: 10,
-           children: [
-             _buildEditDeleteItem(icon: AppIcons.icEdit, text: "Edit", onTap: (){}),
-             _buildEditDeleteItem(icon: AppIcons.icDelete, text: "Delete", onTap: (){}),
-
-           ],
-         ),
-       );
-     });
-  }
-
-  Row _buildEditDeleteItem({required String icon, required String text, required VoidCallback onTap}) {
-    return Row(
-      spacing: 20,
-      children: [
-        IconButton(
-            onPressed: onTap, icon: SvgPicture.asset(icon)),
-        Text(text, style: AppTextStyles.visitorDetailSubtitleTextStyle,)
-      ],
-    );
-  }*/
 }

@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../res/app_icons.dart';
 import '../../../res/app_textstyles.dart';
 import 'edit_profile_page.dart';
+import 'emergency_calls_page.dart';
 
 class ProfileMenu extends StatelessWidget{
   const ProfileMenu({super.key});
@@ -54,7 +55,8 @@ class ProfileMenu extends StatelessWidget{
 
 
   void _onEmergencyTap(BuildContext context){
-    // Navigator.of(context).push(MaterialPageRoute(builder: (_)=> EmergencyCallsPage()));
+    debugPrint("ON tap");
+    Navigator.of(context).push(MaterialPageRoute(builder: (_)=> EmergencyCallsPage()));
   }
 }
 
