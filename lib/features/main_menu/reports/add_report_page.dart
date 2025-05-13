@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:portalixmx_guards_app/features/main_menu/reports/report_summary_page.dart';
 import 'package:portalixmx_guards_app/widgets/bg_gradient_screen.dart';
 
 import '../../../res/app_colors.dart';
@@ -85,8 +86,8 @@ class _AddReportPageState extends State<AddReportPage> {
                     height: 50,
                     width: double.infinity,
                     child: PrimaryBtn(onTap: (){
-                      // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> ComplaintSummaryPage()));
-                    }, btnText: "Submit & Share to Admin"),
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> ReportSummaryPage()));
+                    }, btnText: "Submit & Share to A  dmin"),
                   ),
                 )
               ],
