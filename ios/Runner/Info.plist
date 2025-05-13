@@ -29,10 +29,10 @@
 		<key>UIMainStoryboardFile</key>
 		<string>Main</string>
 		<key>NSCameraUsageDescription</key>
-        <string>This app needs camera access to scan QR codes</string>
+        <string>This app needs camera access to scan QR codes and capturing photos for reports</string>
 
         <key>NSPhotoLibraryUsageDescription</key>
-        <string>This app needs photos access to get QR code from photo library</string>
+        <string>This app needs photos access adding photos to reports or adding photos to QR Code</string>
 		<key>UISupportedInterfaceOrientations</key>
 		<array>
 			<string>UIInterfaceOrientationPortrait</string>

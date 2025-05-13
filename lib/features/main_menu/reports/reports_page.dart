@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:portalixmx_guards_app/features/main_menu/reports/add_report_page.dart';
 import 'package:portalixmx_guards_app/res/app_icons.dart';
 
-import '../../res/app_colors.dart';
-import '../../res/app_textstyles.dart';
+import '../../../res/app_colors.dart';
+import '../../../res/app_textstyles.dart';
 
 class ReportsPage extends StatelessWidget{
   const ReportsPage({super.key});
@@ -28,7 +29,9 @@ class ReportsPage extends StatelessWidget{
                       ),
                       backgroundColor: AppColors.btnColor
                     ),
-                    onPressed: (){}, icon: SvgPicture.asset(AppIcons.icAdd))
+                    onPressed: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> AddReportPage()));
+                    }, icon: SvgPicture.asset(AppIcons.icAdd))
               ],
             ),
             Expanded(child: ListView.builder(

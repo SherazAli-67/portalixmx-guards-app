@@ -10,6 +10,8 @@ class AppIcons {
   static const icLogsIn = 'assets/icons/ic_logs_in.svg';
   static const icLogsOut = 'assets/icons/ic_logs_out.svg';
   static const icGuestVerified  ='assets/icons/ic_guest_verified.svg';
+  static const icCamera = 'assets/icons/ic_camera.svg';
+  static const icUploadPhotos = 'assets/icons/ic_upload_photos.svg';
 
 
 
