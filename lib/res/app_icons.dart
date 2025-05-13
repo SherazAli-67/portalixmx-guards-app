@@ -12,6 +12,7 @@ class AppIcons {
   static const icGuestVerified  ='assets/icons/ic_guest_verified.svg';
   static const icCamera = 'assets/icons/ic_camera.svg';
   static const icUploadPhotos = 'assets/icons/ic_upload_photos.svg';
+  static const icEmergencyCalls = 'assets/icons/ic_emergency_calls.svg';
 
 
 

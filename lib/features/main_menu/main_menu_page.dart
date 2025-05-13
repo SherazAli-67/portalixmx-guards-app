@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portalixmx_guards_app/features/main_menu/visitors/home_page.dart';
-import 'package:portalixmx_guards_app/features/main_menu/profile_menu_page.dart';
+import 'package:portalixmx_guards_app/features/main_menu/profile_menu/profile_menu_page.dart';
 import 'package:portalixmx_guards_app/features/main_menu/reports/reports_page.dart';
 import 'package:portalixmx_guards_app/features/main_menu/security_alert_page.dart';
 import 'package:provider/provider.dart';
