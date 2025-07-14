@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:portalixmx_guards_app/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../res/app_textstyles.dart';
 import '../../widgets/app_textfield_widget.dart';
 import '../../widgets/bg_logo_screen.dart';
 import '../../widgets/primary_btn.dart';
-import '../main_menu/main_menu_page.dart';
 import 'otp_page.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

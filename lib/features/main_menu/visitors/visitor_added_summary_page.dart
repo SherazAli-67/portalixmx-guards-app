@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:portalixmx_guards_app/features/main_menu/visitors/vistor_info_item_widget.dart';
 import '../../../app_data/app_data.dart';
 import '../../../res/app_colors.dart';
-import '../../../res/app_icons.dart';
 import '../../../res/app_textstyles.dart';
 import '../../../widgets/bg_gradient_screen.dart';
-import '../../../widgets/primary_btn.dart';
 
 class VisitorAddedSummaryPage extends StatelessWidget{
   const VisitorAddedSummaryPage({super.key});

@@ -180,7 +180,7 @@ class _ScannerScreenState extends State<ScannerScreen> with WidgetsBindingObserv
                                         end: const Alignment(1.0, 0.0), // Maps x2, y2 from SVG
                                         colors: [
                                           const Color(0xFF1877F2), // First color stop
-                                          const Color(0x9494C2FF).withOpacity(0.6), // Second color stop with 60% opacity
+                                          const Color(0x9494C2FF).withValues(alpha: 0.6), // Second color stop with 60% opacity
                                         ],
                                       ),
                                       borderRadius: const BorderRadius.only(
@@ -227,7 +227,7 @@ class _ScannerScreenState extends State<ScannerScreen> with WidgetsBindingObserv
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                           decoration: BoxDecoration(
-                            color: const Color(0x00000000).withOpacity(0.4),
+                            color: const Color(0x00000000)..withValues(alpha: 0.4),
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child:  Text(
@@ -280,7 +280,7 @@ class _ScannerScreenState extends State<ScannerScreen> with WidgetsBindingObserv
                                 inactiveTrackColor: const Color(0xffA4A7AE),
                                 thumbColor: Colors.white,
                                 overlayColor:
-                                Colors.white.withOpacity(0.2),
+                                Colors.white..withValues(alpha: 0.2),
                                 thumbShape: const RoundSliderThumbShape(
                                   enabledThumbRadius: 6,
                                 ),

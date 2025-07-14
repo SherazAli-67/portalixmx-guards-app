@@ -45,7 +45,10 @@ class ReportsPage extends StatelessWidget{
                       leading: CircleAvatar(
                         backgroundColor: index%2 == 0 ? AppColors.lightBtnColor : AppColors.lightPrimaryColor,
                         child: Center(
-                          child:  SvgPicture.asset(AppIcons.icReports, color: index%2 == 0 ? AppColors.btnColor : AppColors.primaryColor,),
+                          child: SvgPicture.asset(AppIcons.icReports,
+                            colorFilter: ColorFilter.mode(index % 2 == 0
+                                ? AppColors.btnColor
+                                : AppColors.primaryColor, BlendMode.srcIn),),
                         ),
                       ),
                       title: Text("Report Name", style: AppTextStyles.tileTitleTextStyle,),

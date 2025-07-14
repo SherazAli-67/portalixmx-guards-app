@@ -51,7 +51,7 @@ class MainMenuPage extends StatelessWidget{
                         end: Alignment.topCenter,
                         colors: [
                           AppColors.btnColor,
-                          AppColors.btnColor.withOpacity(0.0)
+                          AppColors.btnColor.withValues(alpha: 0.0)
 
                         ])
                 ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:portalixmx_guards_app/app_data/app_data.dart';
 
 class LogsUserModel {
   String imageUrl;

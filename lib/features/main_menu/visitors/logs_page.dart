@@ -91,9 +91,9 @@ extension DateHelper on DateTime {
     return formatter.format(this);
   }
   bool isSameDate(DateTime other) {
-    return this.year == other.year &&
-        this.month == other.month &&
-        this.day == other.day;
+    return year == other.year &&
+        month == other.month &&
+        day == other.day;
   }
 
   int getDifferenceInDaysWithNow() {

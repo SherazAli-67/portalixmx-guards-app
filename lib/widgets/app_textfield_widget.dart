@@ -15,7 +15,7 @@ class AppTextField extends StatefulWidget {
     Color hintTextColor = AppColors.greyColor,
     Color borderColor = Colors.transparent,
     int? maxLines,
-  }) : _textController = textController,_hintText = hintText, _textInputType = textInputType, _fillColor = fillColor, _hintTextColor = hintTextColor, _borderColor = borderColor, _maxLines = maxLines;
+  }) : _textController = textController,_hintText = hintText, _textInputType = textInputType, _fillColor = fillColor, _hintTextColor = hintTextColor, _borderColor = borderColor;
 
   final TextEditingController _textController;
   final String _hintText;
@@ -26,7 +26,6 @@ class AppTextField extends StatefulWidget {
   final Color _fillColor;
   final Color _hintTextColor;
   final Color _borderColor;
-  final int? _maxLines;
   @override
   State<AppTextField> createState() => _AppTextFieldState();
 }

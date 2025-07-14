@@ -152,7 +152,19 @@ class _HomePageState extends State<HomePage> {
                     Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> ScanQRCodePage()));
                   }),
                   _buildFAB(icon: AppIcons.icAdd, onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> AddVisitorPage()));
+                    showModalBottomSheet(
+                        backgroundColor: Colors.white,
+                        context: context,
+                        isScrollControlled: true,
+                        builder: (context) {
+                          return FractionallySizedBox(
+                            heightFactor: 0.85,
+                            child: Padding(
+                              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                              child: AddVisitorPage(),
+                            ),
+                          );
+                        });
                   }),
                 ],
 

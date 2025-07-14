@@ -278,7 +278,6 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
       map['id'] = widget.visitor != null ? widget.visitor!.id : widget.guest!.id;
     }
     if(selectedGuestTypeIndex == 0){
-
       result =  await homeProvider.addVisitor(data: map, comingForUpdate: comingForEdit);
       await homeProvider.getAllVisitors();
     }else{

@@ -121,7 +121,7 @@ class HomeProvider extends ChangeNotifier {
       }
 
     } catch (e) {
-      print('Error occurred: $e');
+      debugPrint('Error occurred: $e');
     }
     return result;
   }
