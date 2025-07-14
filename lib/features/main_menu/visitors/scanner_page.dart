@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:portalixmx_guards_app/features/main_menu/visitors/guest_verified_page.dart';
@@ -22,8 +21,7 @@ class _ScannerScreenState extends State<ScannerScreen> with WidgetsBindingObserv
   StreamSubscription? _scanSubscription;
   Timer? _instructionTimer;
   bool _showInstruction = false;
-  bool _isTorchOn = false;
-  bool _isFrontCamera = false;
+
   bool _isControllerInitialized = false;
   double _zoomFactor = 0.0;
 
@@ -128,26 +126,6 @@ class _ScannerScreenState extends State<ScannerScreen> with WidgetsBindingObserv
     if (!_isScanning) return;
     _isScanning = false;
     _scanSubscription?.cancel();
-  }
-
-  void _toggleTorch() async {
-    if (!_isControllerInitialized) return;
-    try {
-      await cameraController.toggleTorch();
-      setState(() => _isTorchOn = !_isTorchOn);
-    } catch (e) {
-      debugPrint('Failed to toggle torch: $e');
-    }
-  }
-
-  void _switchCamera() async {
-    if (!_isControllerInitialized) return;
-    try {
-      await cameraController.switchCamera();
-      setState(() => _isFrontCamera = !_isFrontCamera);
-    } catch (e) {
-      debugPrint('Failed to switch camera: $e');
-    }
   }
 
 

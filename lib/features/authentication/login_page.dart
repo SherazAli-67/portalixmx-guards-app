@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:portalixmx_guards_app/providers/auth_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../res/app_textstyles.dart';
 import '../../widgets/app_textfield_widget.dart';
@@ -18,8 +22,10 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  late AuthProvider provider;
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of<AuthProvider>(context);
     return ScreenWithBgLogo(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10.0),
@@ -34,9 +40,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: 50,
               width: double.infinity,
-              child: PrimaryBtn(onTap: (){
-                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx)=> MainMenuPage()), (val)=> false);
-              }, btnText: "Log in"),
+              child: PrimaryBtn(onTap: _onLoginTap, btnText: "Log in", isLoading: provider.isLogging,),
             ),
             TextButton(onPressed: (){
               Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> OtpPage()));
@@ -45,5 +49,19 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void _onLoginTap() async{
+    String emailAddress = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+
+    if(emailAddress.isEmpty || password.isEmpty){
+      return;
+    }
+
+   bool result = await provider.onLoginTap(email: emailAddress, password: password);
+    if(result){
+      Navigator.of(context).push(MaterialPageRoute(builder: (_)=> OtpPage()));
+    }
   }
 }

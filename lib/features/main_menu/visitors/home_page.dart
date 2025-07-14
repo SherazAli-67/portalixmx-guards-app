@@ -3,9 +3,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:portalixmx_guards_app/features/main_menu/visitors/add_visitor_page.dart';
 import 'package:portalixmx_guards_app/features/main_menu/visitors/logs_page.dart';
 import 'package:portalixmx_guards_app/features/main_menu/visitors/scan_qr_code_page.dart';
-import 'package:portalixmx_guards_app/features/main_menu/visitors/scanner_page.dart';
 import 'package:portalixmx_guards_app/res/app_icons.dart';
+import 'package:provider/provider.dart';
 
+import '../../../models/visitor_api_response.dart';
+import '../../../providers/home_provider.dart';
 import '../../../res/app_colors.dart';
 import '../../../res/app_textstyles.dart';
 
@@ -17,10 +19,20 @@ class HomePage extends StatefulWidget{
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selecteedTab = 0;
+  int _selectedTab = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      _initVisitors();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    final provider = Provider.of<HomeProvider>(context,);
+  return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20),
         child: Stack(
@@ -37,7 +49,7 @@ class _HomePageState extends State<HomePage> {
                         child:  Icon(Icons.person, color: Colors.white,),
                       ),
                     ),
-                    Text("Welcome Alex!", style: AppTextStyles.regularTextStyle,)
+                    Text("Welcome ${provider.userName}!", style: AppTextStyles.regularTextStyle,)
                   ],
                 ),
                 const SizedBox(height: 20,),
@@ -46,35 +58,70 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: _selecteedTab == 0 ?  AppColors.btnColor : Colors.white
+                            backgroundColor: _selectedTab == 0 ?  AppColors.btnColor : Colors.white
                         ),
                         onPressed: (){
-                          if(_selecteedTab != 0){
-                            _selecteedTab = 0;
+                          if(_selectedTab != 0){
+                            _selectedTab = 0;
+                            provider.getAllVisitors();
                             setState(() {});
                           }
-                        }, child: Text("Visitors", style: AppTextStyles.tabsTextStyle.copyWith(color: _selecteedTab == 0 ?  Colors.white : AppColors.primaryColor),)),
+                        }, child: Text("Visitors", style: AppTextStyles.tabsTextStyle.copyWith(color: _selectedTab == 0 ?  Colors.white : AppColors.primaryColor),)),
             
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: _selecteedTab == 1 ?  AppColors.btnColor : Colors.white
+                            backgroundColor: _selectedTab == 1 ?  AppColors.btnColor : Colors.white
                         ),
                         onPressed: (){
-                          if(_selecteedTab != 1){
-                            _selecteedTab = 1;
+                          if(_selectedTab != 1){
+                            _selectedTab = 1;
+                            // provider.getAllGuests();
                             setState(() {});
                           }
-                        }, child: Text("Logs", style: AppTextStyles.tabsTextStyle.copyWith(color: _selecteedTab == 1 ?  Colors.white : AppColors.primaryColor),)),
+                        }, child: Text("Logs", style: AppTextStyles.tabsTextStyle.copyWith(color: _selectedTab == 1 ?  Colors.white : AppColors.primaryColor),)),
             
                   ],
                 ),
                 const SizedBox(height: 20,),
                 Expanded(
-                  child: _selecteedTab == 0 ?
+                  child: _selectedTab == 0 ?
                   ListView.builder(
-                      itemCount: 3,
+                      itemCount: provider.visitors.length,
                       itemBuilder: (ctx, index){
+
+                        Visitor visitor = provider.visitors[index];
                         return Card(
+                          margin: EdgeInsets.only(bottom: 10),
+                          child: ListTile(
+                            // onTap: ()=> Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> VisitorDetailPage(visitor: visitor,))),
+                            contentPadding: EdgeInsets.only(left: 10),
+                            leading: CircleAvatar(
+                              backgroundColor: AppColors.btnColor,
+                              child: Center(
+                                child:  Icon(Icons.person, color: Colors.white,),
+                              ),
+                            ),
+                            title: Text(visitor.name, style: AppTextStyles.tileTitleTextStyle,),
+                            subtitle: Text(visitor.type, style: AppTextStyles.tileSubtitleTextStyle,),
+                            trailing: PopupMenuButton(
+                                elevation: 0,
+                                color: Colors.white,
+                                position: PopupMenuPosition.under,
+                                padding: EdgeInsets.zero,
+                                icon: Icon(Icons.more_vert_rounded),
+                                onSelected: (val){
+                                  // onDeleteTap(visitor);
+                                },
+                                itemBuilder: (ctx){
+                                  return [
+                                    PopupMenuItem(
+                                        value: 1,
+                                        child: Text("Delete Visitor"))
+                                  ];
+                                }),
+                          ),
+                        );
+                      /*  return Card(
                           margin: EdgeInsets.only(bottom: 10),
                           child: ListTile(
                             // onTap: ()=> Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> VisitorDetailPage())),
@@ -89,10 +136,9 @@ class _HomePageState extends State<HomePage> {
                             subtitle: Text("Sep 20, 10:00 AM", style: AppTextStyles.tileSubtitleTextStyle,),
             
                           ),
-                        );
+                        );*/
                       })
-                  : LogsPage()
-                  ,
+                  : LogsPage(),
                 )
               ],
             ),
@@ -127,5 +173,15 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: AppColors.primaryColor,
         onPressed: onTap,
         child: SvgPicture.asset(icon));
+  }
+
+  Future<void> _initVisitors() async {
+    final provider = Provider.of<HomeProvider>(context, listen: false);
+    Map<String, dynamic>? visitors = await provider.getAllVisitors();
+    if(visitors == null){
+      debugPrint("Visitors null found");
+      /* userProvider.reset();
+      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_)=> LoginPage()), (val)=> false);*/
+    }
   }
 }
