@@ -74,4 +74,24 @@ class Guest {
       v: json['__v'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'name': name,
+      'type': type,
+      'contactNumber': contactNumber,
+      'carPlateNumber': carPlateNumber,
+      'vehicleModel': vehicleModel,
+      'color': color,
+      'fromDate': fromDate.toIso8601String(),
+      'fromTime': fromTime,
+      'toDate': toDate.toIso8601String(),
+      'toTime': toTime,
+      'createdBy': createdBy,
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+      '__v': v,
+    };
+  }
 }

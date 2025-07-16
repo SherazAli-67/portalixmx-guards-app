@@ -39,6 +39,7 @@ class _AppTextFieldState extends State<AppTextField> {
       readOnly: widget.readOnly,
       obscureText: widget.isPassword && hidePassword,
       keyboardType: widget._textInputType,
+      onTapOutside: (_)=> FocusManager.instance.primaryFocus!.unfocus(),
       decoration: InputDecoration(
           hintText: widget._hintText,
           hintStyle: AppTextStyles.hintTextStyle.copyWith(color: widget._hintTextColor),

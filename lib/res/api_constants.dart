@@ -7,8 +7,10 @@ class ApiConstants {
   static const allVisitorsEndPoint = '/all-visitors';
   static const addGuest = '/create-guest';
   static const updateGuest = '/update-guest';
+  static const guestByID = '/guest';
   static const addVisitor = '/create-visitor';
   static const updateVisitor = '/update-visitor';
+  static const visitorByID = '/visitor';
   static const addComplaint = '/save-complain';
   static const allComplaints = '/get-complain-list';
   static const saveAccessControl = '/request-control';

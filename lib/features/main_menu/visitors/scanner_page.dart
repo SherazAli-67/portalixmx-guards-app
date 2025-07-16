@@ -1,3 +1,4 @@
+/*
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -332,6 +333,7 @@ class _ScannerScreenState extends State<ScannerScreen> with WidgetsBindingObserv
     if (!_isScanning) return; // Ignore if we're not supposed to be scanning
 
     _stopScanning();
+*/
 /*    if(_appSettingsService.vibrationEnabled){
       await HapticFeedback.vibrate();
     }
@@ -341,7 +343,8 @@ class _ScannerScreenState extends State<ScannerScreen> with WidgetsBindingObserv
     if(_appSettingsService.autoCopyEnabled){
       Clipboard.setData(ClipboardData(text: barcode.displayValue ?? ''));
       Fluttertoast.showToast(msg: 'Text Copied to Clipboard');
-    }*/
+    }*//*
+
 
     _saveAndGoToResultScreen(barcode);
 
@@ -360,3 +363,4 @@ class _ScannerScreenState extends State<ScannerScreen> with WidgetsBindingObserv
     }
 
 }
+*/

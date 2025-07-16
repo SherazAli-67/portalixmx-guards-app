@@ -71,4 +71,23 @@ class Visitor {
       updatedAt: DateTime.parse(json['updatedAt']),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'name': name,
+      'type': type,
+      'contactNumber': contactNumber,
+      'moTime': moTime,
+      'tueTime': tueTime,
+      'wedTime': wedTime,
+      'thuTime': thuTime,
+      'friTime': friTime,
+      'satTime': satTime,
+      'sunTime': sunTime,
+      'createdBy': createdBy,
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+    };
+  }
 }

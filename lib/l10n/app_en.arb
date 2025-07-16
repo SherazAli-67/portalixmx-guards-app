@@ -74,5 +74,6 @@
   "updateYour" : "Update your {userInfo}",
   "addGuest" : "Add Guest",
   "deleteComplaint" : "Delete Complaint",
-  "profileInfoUpdated" : "Profile information updated"
+  "profileInfoUpdated" : "Profile information updated",
+  "guestVerified" : "Guest Verified"
 }

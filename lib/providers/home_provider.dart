@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/guest_api_response.dart';
 import '../models/visitor_api_response.dart';
+import '../models/verified_user.dart';
 import '../res/api_constants.dart';
 import '../services/api_service.dart';
 
@@ -12,6 +13,13 @@ class HomeProvider extends ChangeNotifier {
   bool loadingUserInfo = false;
   String userName = '';
   String userID = '';
+  bool loadingGuestInfo = false;
+  bool loadingVisitorInfo = false;
+  List<VerifiedUser> _verifiedUsers = [];
+  String _verifiedUsersKey = 'verifiedUsers';
+
+  List<VerifiedUser> get verifiedUsers => _verifiedUsers;
+
 
   HomeProvider(){
     _initUser();
@@ -44,6 +52,33 @@ class HomeProvider extends ChangeNotifier {
     return null;
   }
 
+  Future<dynamic> getVisitorByID({required String visitorID}) async{
+    loadingVisitorInfo = true;
+    notifyListeners();
+    try{
+      String endPoint = '${ApiConstants.visitorByID}/$visitorID';
+      final response =  await _apiService.getRequest(endpoint: endPoint);
+      debugPrint("Visitor by id response: ${response?.body}");
+      if(response != null){
+        final map = jsonDecode(response.body);
+        if(map['status']){
+          loadingVisitorInfo = false;
+          notifyListeners();
+          debugPrint("Status true and data is: \n${map['data']}");
+          Visitor visitor = Visitor.fromJson(map['data']);
+          debugPrint("Visitor Name: ${visitor.name}");
+          return visitor;
+        }
+      }
+    }catch(e){
+      debugPrint("Error while logging in: ${e.toString()}");
+    }
+
+    loadingVisitorInfo = false;
+    notifyListeners();
+    return null;
+  }
+
   Future<Map<String, dynamic>?> getAllGuests() async{
 
     try{
@@ -58,6 +93,29 @@ class HomeProvider extends ChangeNotifier {
       debugPrint("Error while logging in: ${e.toString()}");
     }
 
+    return null;
+  }
+
+  Future<dynamic> getGuestByID({required String guestID}) async{
+    loadingGuestInfo = true;
+    notifyListeners();
+    try{
+      String endPoint = '${ApiConstants.guestByID}/$guestID';
+
+      final response =  await _apiService.getRequest(endpoint: endPoint);
+      debugPrint("Guest by id response: ${response?.body}");
+      /*if(response != null){
+        GuestResponse apiResponse = GuestResponse.fromJson(jsonDecode(response.body));
+        _guests = apiResponse.data;
+        _guests.sort((a, b)=> b.createdAt.compareTo(a.createdAt));
+        notifyListeners();
+      }*/
+    }catch(e){
+      debugPrint("Error while logging in: ${e.toString()}");
+    }
+
+    loadingGuestInfo = false;
+    notifyListeners();
     return null;
   }
 
@@ -134,8 +192,45 @@ class HomeProvider extends ChangeNotifier {
     userName = sharedPreferences.getString("userName") ?? '';
     userID = sharedPreferences.getString("userID") ?? '';
 
+    final String? storedData = sharedPreferences.getString(_verifiedUsersKey);
+
+    if (storedData != null) {
+      final List<dynamic> decodedData = json.decode(storedData);
+      _verifiedUsers = decodedData
+          .map((item) => VerifiedUser.fromJson(item))
+          .toList();
+    }
     notifyListeners();
   }
 
 
+  void addUserToVerifiedList(Visitor visitor) async {
+    final verifiedUser = VerifiedUser(
+      user: visitor,
+      logsIn: DateTime.now(),
+      logsOut: null,
+    );
+    _verifiedUsers.add(verifiedUser);
+    notifyListeners();
+
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    final List<Map<String, dynamic>> encodedData =
+        _verifiedUsers.map((user) => user.toJson()).toList();
+    await sharedPreferences.setString(_verifiedUsersKey, json.encode(encodedData));
+  }
+
+  void addGuestToVerifiedList(Guest guest) async {
+    final verifiedUser = VerifiedUser(
+      user: guest,
+      logsIn: DateTime.now(),
+      logsOut: null,
+    );
+    _verifiedUsers.add(verifiedUser);
+    notifyListeners();
+
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    final List<Map<String, dynamic>> encodedData =
+        _verifiedUsers.map((user) => user.toJson()).toList();
+    await sharedPreferences.setString(_verifiedUsersKey, json.encode(encodedData));
+  }
 }

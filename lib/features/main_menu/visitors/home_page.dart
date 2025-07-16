@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:portalixmx_guards_app/features/main_menu/visitors/add_visitor_page.dart';
 import 'package:portalixmx_guards_app/features/main_menu/visitors/logs_page.dart';
 import 'package:portalixmx_guards_app/features/main_menu/visitors/scan_qr_code_page.dart';
+import 'package:portalixmx_guards_app/l10n/app_localizations.dart';
+import 'package:portalixmx_guards_app/models/verified_user.dart';
 import 'package:portalixmx_guards_app/res/app_icons.dart';
 import 'package:provider/provider.dart';
 
@@ -24,9 +26,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_){
-      _initVisitors();
-    });
+
   }
 
   @override
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                         onPressed: (){
                           if(_selectedTab != 0){
                             _selectedTab = 0;
-                            provider.getAllVisitors();
+
                             setState(() {});
                           }
                         }, child: Text("Visitors", style: AppTextStyles.tabsTextStyle.copyWith(color: _selectedTab == 0 ?  Colors.white : AppColors.primaryColor),)),
@@ -86,10 +86,13 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   child: _selectedTab == 0 ?
                   ListView.builder(
-                      itemCount: provider.visitors.length,
+                      itemCount: provider.verifiedUsers.length,
                       itemBuilder: (ctx, index){
 
-                        Visitor visitor = provider.visitors[index];
+                       VerifiedUser user = provider.verifiedUsers[index];
+                       String name = user.user.name;
+                       String type = user.user is Visitor ? AppLocalizations.of(context)!.regularVisitor : AppLocalizations.of(context)!.guest;
+
                         return Card(
                           margin: EdgeInsets.only(bottom: 10),
                           child: ListTile(
@@ -101,8 +104,8 @@ class _HomePageState extends State<HomePage> {
                                 child:  Icon(Icons.person, color: Colors.white,),
                               ),
                             ),
-                            title: Text(visitor.name, style: AppTextStyles.tileTitleTextStyle,),
-                            subtitle: Text(visitor.type, style: AppTextStyles.tileSubtitleTextStyle,),
+                            title: Text(name, style: AppTextStyles.tileTitleTextStyle,),
+                            subtitle: Text(type, style: AppTextStyles.tileSubtitleTextStyle,),
                             trailing: PopupMenuButton(
                                 elevation: 0,
                                 color: Colors.white,
@@ -187,13 +190,5 @@ class _HomePageState extends State<HomePage> {
         child: SvgPicture.asset(icon));
   }
 
-  Future<void> _initVisitors() async {
-    final provider = Provider.of<HomeProvider>(context, listen: false);
-    Map<String, dynamic>? visitors = await provider.getAllVisitors();
-    if(visitors == null){
-      debugPrint("Visitors null found");
-      /* userProvider.reset();
-      Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (_)=> LoginPage()), (val)=> false);*/
-    }
-  }
+
 }

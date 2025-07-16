@@ -285,12 +285,16 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
       await homeProvider.getAllGuests();
     }
     if(result){
-      Fluttertoast.showToast(msg: comingForEdit ? '$name has been updated' : '$name has been added as a $selectedGuestTypeIndex');
-      Navigator.of(context).pop();
+      Fluttertoast.showToast(msg: comingForEdit ? '$name has been updated' : '$name has been added as a ${_guestTypes[selectedGuestTypeIndex]}');
+      _onPopup();
     }
   }
 
   String getFormattedTime(DayTimeModel time){
     return '${time.time!.hour}:${time.time!.minute} - ${time.endTime!.hour}:${time.endTime!.minute}';
+  }
+
+  void _onPopup() {
+    Navigator.of(context).pop();
   }
 }

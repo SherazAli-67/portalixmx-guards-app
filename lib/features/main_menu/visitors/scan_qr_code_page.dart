@@ -109,14 +109,14 @@ class _ScanQRCodePageState extends State<ScanQRCodePage> with WidgetsBindingObse
   }
 
   void _foundBarcode(Barcode barcode) async {
-    debugPrint("Barcode found: ${barcode.displayValue}");
+    debugPrint("Barcode found:  ${barcode.displayValue}");
     _stopScanning(); // cancel the stream subscription
     _disposeController();
 
     if (barcode.format == BarcodeFormat.qrCode) {
       await Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => GuestVerifiedPage()),
+        MaterialPageRoute(builder: (context) => GuestVerifiedPage(barcode: barcode,)),
       );
       _hasScanned = false;
       _initializeController(); // restart scanner after returning
