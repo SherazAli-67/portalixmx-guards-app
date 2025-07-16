@@ -2,11 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:portalixmx_guards_app/features/main_menu/visitors/visitor_detail_page.dart';
+import 'package:portalixmx_guards_app/models/guest_api_response.dart';
 import 'package:portalixmx_guards_app/models/verified_user.dart';
 import 'package:portalixmx_guards_app/providers/home_provider.dart';
 import 'package:portalixmx_guards_app/res/app_icons.dart';
 import 'package:portalixmx_guards_app/res/app_textstyles.dart';
 import 'package:provider/provider.dart';
+
+import '../../../models/visitor_api_response.dart';
 
 class LogsPage extends StatelessWidget {
   const LogsPage({super.key});
@@ -76,7 +80,7 @@ class LogsItemWidget extends StatelessWidget {
         child: ListTile(
           onTap: () {
             // TODO: Pass user to detail page if needed
-            // Navigator.of(context).push(MaterialPageRoute(builder: (_)=> VisitorDetailPage()));
+            Navigator.of(context).push(MaterialPageRoute(builder: (_)=> VisitorDetailPage(visitor: item.user is Visitor ? item.user : null, guest: item.user is Guest ? item.user : null,)));
           },
           contentPadding: const EdgeInsets.only(left: 10),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),

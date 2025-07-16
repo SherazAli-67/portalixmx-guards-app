@@ -8,10 +8,12 @@ import 'package:portalixmx_guards_app/models/verified_user.dart';
 import 'package:portalixmx_guards_app/res/app_icons.dart';
 import 'package:provider/provider.dart';
 
+import '../../../models/guest_api_response.dart';
 import '../../../models/visitor_api_response.dart';
 import '../../../providers/home_provider.dart';
 import '../../../res/app_colors.dart';
 import '../../../res/app_textstyles.dart';
+import 'visitor_detail_page.dart';
 
 class HomePage extends StatefulWidget{
   const HomePage({super.key});
@@ -96,7 +98,8 @@ class _HomePageState extends State<HomePage> {
                         return Card(
                           margin: EdgeInsets.only(bottom: 10),
                           child: ListTile(
-                            // onTap: ()=> Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> VisitorDetailPage(visitor: visitor,))),
+                            onTap: ()=> Navigator.of(context).push(MaterialPageRoute(builder: (_)=> VisitorDetailPage(visitor: user.user is Visitor ? user.user : null, guest: user.user is Guest ? user.user : null,)))
+                            ,
                             contentPadding: EdgeInsets.only(left: 10),
                             leading: CircleAvatar(
                               backgroundColor: AppColors.btnColor,
