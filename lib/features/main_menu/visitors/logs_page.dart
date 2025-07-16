@@ -89,7 +89,8 @@ class LogsItemWidget extends StatelessWidget {
           //     :
           const CircleAvatar(child: Icon(Icons.person)),
           title: Text(name, style: AppTextStyles.tileTitleTextStyle),
-          subtitle: Text('In: $logsIn${logsOut != null ? '\nOut: $logsOut' : ''}', style: AppTextStyles.tileSubtitleTextStyle),
+          subtitle: Text(logsOut ?? logsIn, style: AppTextStyles.tileSubtitleTextStyle),
+          // subtitle: Text('In: $logsIn${logsOut != null ? '\nOut: $logsOut' : ''}', style: AppTextStyles.tileSubtitleTextStyle),
           trailing: IconButton(onPressed: () {}, icon: SvgPicture.asset(AppIcons.icLogsOut, height: 20)),
         ),
       ),
@@ -98,7 +99,7 @@ class LogsItemWidget extends StatelessWidget {
 }
 
 const String dateFormatter = 'MMMM dd, y';
-const String dateTimeFormatter = 'MMMM dd, y – HH:mm';
+const String dateTimeFormatter = 'MMMM dd  HH:mm aa';
 
 extension DateHelper on DateTime {
   String formatDate() {

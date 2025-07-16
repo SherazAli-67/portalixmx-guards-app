@@ -15,8 +15,6 @@ class ScanQRCodePage extends StatefulWidget{
 
 class _ScanQRCodePageState extends State<ScanQRCodePage> with WidgetsBindingObserver{
   late MobileScannerController cameraController;
-  bool _isScanning = false;
-  StreamSubscription? _scanSubscription;
   bool _isControllerInitialized = false;
   bool _hasScanned = false; // Add this to your state
 
@@ -42,7 +40,6 @@ class _ScanQRCodePageState extends State<ScanQRCodePage> with WidgetsBindingObse
       await cameraController.start();
       if (mounted) {
         setState(() => _isControllerInitialized = true);
-        _startScanning();
       }
     } catch (e) {
       debugPrint('Error initializing camera: $e');
@@ -71,11 +68,9 @@ class _ScanQRCodePageState extends State<ScanQRCodePage> with WidgetsBindingObse
   void _reinitializeController() {
     _disposeController();
     _initializeController();
-    _startScanning();
   }
 
   void _disposeController() {
-    _stopScanning();
     if (_isControllerInitialized) {
       cameraController.dispose();
       _isControllerInitialized = false;
@@ -88,7 +83,6 @@ class _ScanQRCodePageState extends State<ScanQRCodePage> with WidgetsBindingObse
     _reinitializeController();
   }
 
-
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
@@ -96,21 +90,10 @@ class _ScanQRCodePageState extends State<ScanQRCodePage> with WidgetsBindingObse
     super.dispose();
   }
 
-  void _startScanning() {
-    if (_isScanning || _hasScanned) return;
-    _isScanning = true;
-
-    _scanSubscription = cameraController.barcodes.listen((capture) {
-      if (capture.barcodes.isNotEmpty && !_hasScanned) {
-        _hasScanned = true;
-        _foundBarcode(capture.barcodes.first);
-      }
-    });
-  }
-
-  void _foundBarcode(Barcode barcode) async {
+  void _foundQRCode(Barcode barcode) async {
+    if (_hasScanned) return;
+    _hasScanned = true;
     debugPrint("Barcode found:  ${barcode.displayValue}");
-    _stopScanning(); // cancel the stream subscription
     _disposeController();
 
     if (barcode.format == BarcodeFormat.qrCode) {
@@ -122,56 +105,6 @@ class _ScanQRCodePageState extends State<ScanQRCodePage> with WidgetsBindingObse
       _initializeController(); // restart scanner after returning
     }
   }
-
-  void _stopScanning() {
-    _isScanning = false;
-    _scanSubscription?.cancel();
-    _scanSubscription = null;
-  }
- /* void _startScanning() {
-    if (_isScanning) return;
-    _isScanning = true;
-    _scanSubscription = cameraController.barcodes.listen((capture) {
-      if (capture.barcodes.isNotEmpty) {
-        debugPrint('Barcode: ${ capture.barcodes.first.displayValue}');
-        _foundBarcode(capture.barcodes.first);
-      }
-    });
-  }
-
-  void _stopScanning() {
-    if (!_isScanning) return;
-    _isScanning = false;
-    _scanSubscription?.cancel();
-  }
-
-  void _foundBarcode(Barcode barcode) async {
-    *//*debugPrint("Barcode found");
-    if (!_isScanning) return; // Ignore if we're not supposed to be scanning
-    _stopScanning();
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> GuestVerifiedPage()));
-
-    await HapticFeedback.vibrate();*//*
-    debugPrint("Barcode found 1 is Scanning: $_isScanning");
-    _disposeController();
-    debugPrint("After dispose: $_isScanning");
-   *//* if (!_isScanning) return; // Ignore if we're not supposed to be scanning
-    debugPrint("Barcode found 2 is Scanning: $_isScanning");
-    _stopScanning();
-
-    debugPrint("Barcode found 3 is Scanning: $_isScanning");
-    await HapticFeedback.vibrate();
-
-    debugPrint("Barcode found 4 is Scanning: $_isScanning");*//*
-    if(barcode.format == BarcodeFormat.qrCode){
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => GuestVerifiedPage()),
-      ).then((_) {
-        _startScanning();
-      });
-    }
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -215,8 +148,8 @@ class _ScanQRCodePageState extends State<ScanQRCodePage> with WidgetsBindingObse
                       MobileScanner(
                         controller: cameraController,
                         onDetect: (capture) {
-                          if (capture.barcodes.isNotEmpty) {
-                            _foundBarcode(capture.barcodes.first);
+                          if (!_hasScanned && capture.barcodes.isNotEmpty) {
+                            _foundQRCode(capture.barcodes.first);
                           }
                         },
                       ),
