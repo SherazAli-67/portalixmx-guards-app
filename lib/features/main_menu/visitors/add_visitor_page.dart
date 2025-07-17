@@ -3,11 +3,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../../app_data/app_data.dart';
-import '../../../l10n/app_localizations.dart';
+import '../../../generated/app_localizations.dart';
 import '../../../models/day_time_model.dart';
 import '../../../models/guest_api_response.dart';
 import '../../../models/visitor_api_response.dart';
-import '../../../providers/datetime_format_helpers.dart' show DateTimeFormatHelpers;
+import '../../../helpers/datetime_format_helpers.dart';
 import '../../../providers/home_provider.dart';
 import '../../../res/app_colors.dart';
 import '../../../res/app_textstyles.dart';
@@ -31,7 +31,7 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
   final TextEditingController _vehicleModelController = TextEditingController();
   final TextEditingController _colorController = TextEditingController();
 
-  final List<String> _guestTypes = [
+  List<String> _guestTypes = [
     'Regular Visitor', 'Guest'
   ];
   int selectedGuestTypeIndex = 1;
@@ -63,6 +63,14 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
 
       }
     }
+
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      _guestTypes = [
+        AppLocalizations.of(context)!.regularVisitor,
+        AppLocalizations.of(context)!.guest
+      ];
+      setState(() {});
+    });
     super.initState();
   }
   @override
@@ -84,7 +92,7 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
         children: [
           Align(
               alignment: Alignment.center,
-              child: Text(comingForEdit ?  "Edit Guest" : "Add Guest", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.primaryColor),)),
+              child: Text(comingForEdit ?  AppLocalizations.of(context)!.editGuest : AppLocalizations.of(context)!.addGuest, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.primaryColor),)),
           AppTextField(textController: _nameController, hintText: AppLocalizations.of(context)!.name, fillColor: AppColors.fillColorGrey, hintTextColor: AppColors.hintTextColor, borderColor: AppColors.borderColor,),
           DropdownTextfieldWidget(isEmpty: selectedGuestTypeIndex == -1, selectedValue: _guestTypes[selectedGuestTypeIndex], onChanged: (val)=> setState(()=> selectedGuestTypeIndex = _guestTypes.indexOf(val!)), guestTypes: _guestTypes, width: double.infinity, hintText: AppLocalizations.of(context)!.guest),
           AppTextField(textController: _contactNumberController, hintText: AppLocalizations.of(context)!.contactNum,fillColor: AppColors.fillColorGrey, hintTextColor: AppColors.hintTextColor, borderColor: AppColors.borderColor, textInputType: TextInputType.numberWithOptions(),),
@@ -96,7 +104,7 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
             return SizedBox(
               height: 50,
               width: double.infinity,
-              child: PrimaryBtn(onTap: _onSubmitTap, btnText: "Submit", isLoading: provider.addingGuestVisitor,),
+              child: PrimaryBtn(onTap: _onSubmitTap, btnText: AppLocalizations.of(context)!.submit, isLoading: provider.addingGuestVisitor,),
             );
           })
         ],
@@ -146,11 +154,11 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
     return Column(
       spacing: 15,
       children: [
-        AppTextField(textController: _carPlatNumberController, hintText: "Car Plate Number", fillColor: AppColors.fillColorGrey, hintTextColor: AppColors.hintTextColor,borderColor: AppColors.borderColor,),
-        AppTextField(textController: _vehicleModelController, hintText: "Vehicle Model", fillColor: AppColors.fillColorGrey, hintTextColor: AppColors.hintTextColor,borderColor: AppColors.borderColor,),
-        AppTextField(textController: _colorController, hintText: "Color", fillColor: AppColors.fillColorGrey, hintTextColor: AppColors.hintTextColor,borderColor: AppColors.borderColor,),
-        FromDateAndTimeWidget(title: 'From',onDateTap: _onFromDateTap, onTimeTap: _onFromTimeTap, selectedDate: _selectedFromDateTime, selectedTime: _selectedFromTime),
-        FromDateAndTimeWidget(title: 'To',onDateTap: _onToDateTap, onTimeTap: _onToTimeTap, selectedDate: _selectedToDateTime, selectedTime: _selectedToTime),
+        AppTextField(textController: _carPlatNumberController, hintText: AppLocalizations.of(context)!.carPlateNumber, fillColor: AppColors.fillColorGrey, hintTextColor: AppColors.hintTextColor,borderColor: AppColors.borderColor,),
+        AppTextField(textController: _vehicleModelController, hintText: AppLocalizations.of(context)!.vehicleModel, fillColor: AppColors.fillColorGrey, hintTextColor: AppColors.hintTextColor,borderColor: AppColors.borderColor,),
+        AppTextField(textController: _colorController, hintText: AppLocalizations.of(context)!.color, fillColor: AppColors.fillColorGrey, hintTextColor: AppColors.hintTextColor,borderColor: AppColors.borderColor,),
+        FromDateAndTimeWidget(title: AppLocalizations.of(context)!.from,onDateTap: _onFromDateTap, onTimeTap: _onFromTimeTap, selectedDate: _selectedFromDateTime, selectedTime: _selectedFromTime),
+        FromDateAndTimeWidget(title: AppLocalizations.of(context)!.to,onDateTap: _onToDateTap, onTimeTap: _onToTimeTap, selectedDate: _selectedToDateTime, selectedTime: _selectedToTime),
       ],
     );
   }
@@ -180,7 +188,7 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(time != null ? DateTimeFormatHelpers.formatTime(time) :"Time", style: AppTextStyles.regularTextStyle.copyWith(color: AppColors.greyColor2),),
+                        Text(time != null ? DateTimeFormatHelpers.formatTime(time) : AppLocalizations.of(context)!.time, style: AppTextStyles.regularTextStyle.copyWith(color: AppColors.greyColor2),),
                         IconButton(onPressed: ()=> onTimeTap(index), icon: Icon(Icons.access_time, color: AppColors.darkGreyColor2,))
                       ],
                     )
@@ -195,7 +203,7 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(endTime != null ? DateTimeFormatHelpers.formatTime(endTime) :"Time", style: AppTextStyles.regularTextStyle.copyWith(color: AppColors.greyColor2),),
+                        Text(endTime != null ? DateTimeFormatHelpers.formatTime(endTime) :AppLocalizations.of(context)!.time, style: AppTextStyles.regularTextStyle.copyWith(color: AppColors.greyColor2),),
                         IconButton(onPressed: ()=> onEndTimeTap(index), icon: Icon(Icons.access_time, color: AppColors.darkGreyColor2,))
                       ],
                     )
@@ -285,7 +293,9 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
       await homeProvider.getAllGuests();
     }
     if(result){
-      Fluttertoast.showToast(msg: comingForEdit ? '$name has been updated' : '$name has been added as a ${_guestTypes[selectedGuestTypeIndex]}');
+      Fluttertoast.showToast(msg: comingForEdit
+          ? AppLocalizations.of(context)!.userUpdatedMsg(name)
+          : AppLocalizations.of(context)!.userAddedMsg(name, _guestTypes[selectedGuestTypeIndex]));
       _onPopup();
     }
   }

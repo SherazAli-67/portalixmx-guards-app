@@ -24,6 +24,7 @@ class HomeProvider extends ChangeNotifier {
   HomeProvider(){
     _initUser();
   }
+
   bool addingGuestVisitor =  false;
   final _apiService = ApiService();
   List<Visitor> _visitors  = [];
@@ -33,6 +34,10 @@ class HomeProvider extends ChangeNotifier {
   List<Guest> get guests => _guests;
 
 
+  void setUserName({required String name}){
+    userName = name;
+    notifyListeners();
+  }
   Future<Map<String, dynamic>?> getAllVisitors() async{
 
     try{

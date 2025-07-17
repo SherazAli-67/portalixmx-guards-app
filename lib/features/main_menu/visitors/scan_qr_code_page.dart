@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:portalixmx_guards_app/features/main_menu/visitors/guest_verified_page.dart';
+import 'package:portalixmx_guards_app/generated/app_localizations.dart';
 import 'package:portalixmx_guards_app/widgets/bg_gradient_screen.dart';
 import '../../../res/app_textstyles.dart';
 import '../../../widgets/primary_btn.dart';
@@ -93,7 +94,6 @@ class _ScanQRCodePageState extends State<ScanQRCodePage> with WidgetsBindingObse
   void _foundQRCode(Barcode barcode) async {
     if (_hasScanned) return;
     _hasScanned = true;
-    debugPrint("Barcode found:  ${barcode.displayValue}");
     _disposeController();
 
     if (barcode.format == BarcodeFormat.qrCode) {
@@ -119,7 +119,7 @@ class _ScanQRCodePageState extends State<ScanQRCodePage> with WidgetsBindingObse
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 BackButton(color: Colors.white,),
-                Text("Scan QR Code", style: AppTextStyles.regularTextStyle,),
+                Text(AppLocalizations.of(context)!.scanQRCode, style: AppTextStyles.regularTextStyle,),
                 const SizedBox(width: 40,)
                 // IconButton(onPressed: ()=> _showEditBottomSheet(context), icon: Icon(Icons.more_vert_rounded, color: Colors.white,))
               ],
@@ -139,7 +139,7 @@ class _ScanQRCodePageState extends State<ScanQRCodePage> with WidgetsBindingObse
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: 60,
                 children: [
-                  Text("Scanning will start automatically", style: AppTextStyles.regularTextStyle.copyWith(color: Color(0xff596774), fontWeight: FontWeight.w400),),
+                  Text(AppLocalizations.of(context)!.scanningWillStartAutomatically, style: AppTextStyles.regularTextStyle.copyWith(color: Color(0xff596774), fontWeight: FontWeight.w400),),
                   SizedBox(
                     height: size.height*0.4,
                     child: ClipRRect(
@@ -160,7 +160,7 @@ class _ScanQRCodePageState extends State<ScanQRCodePage> with WidgetsBindingObse
                     width: double.infinity,
                     child: PrimaryBtn(onTap: (){
                       // Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> VisitorAddedSummaryPage()));
-                    }, btnText: "Submit"),
+                    }, btnText: AppLocalizations.of(context)!.submit),
                   )
                 ],
               ),

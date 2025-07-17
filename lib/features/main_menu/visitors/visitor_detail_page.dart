@@ -11,11 +11,10 @@ import 'package:portalixmx_guards_app/models/guest_api_response.dart';
 import 'package:portalixmx_guards_app/models/visitor_api_response.dart';
 import 'package:portalixmx_guards_app/providers/home_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../app_data/app_data.dart';
-import '../../../l10n/app_localizations.dart';
-import '../../../providers/datetime_format_helpers.dart';
+import '../../../generated/app_localizations.dart';
+import '../../../helpers/datetime_format_helpers.dart';
 import '../../../res/app_colors.dart';
 import '../../../res/app_icons.dart';
 import '../../../res/app_textstyles.dart';
@@ -153,7 +152,6 @@ class _VisitorDetailPageState extends State<VisitorDetailPage> {
                   });
             }),
             _buildEditDeleteItem(icon: AppIcons.icDelete, text: AppLocalizations.of(context)!.delete, onTap: () async {
-              debugPrint("on Delete tap");
               bool result = false;
               if(widget._guest != null){
                 result = await context.read<HomeProvider>().deleteGuest(guestID: widget._guest!.id);
@@ -162,11 +160,11 @@ class _VisitorDetailPageState extends State<VisitorDetailPage> {
               }
 
               if(result){
-                Fluttertoast.showToast(msg: "User deleted successfully");
+                Fluttertoast.showToast(msg: AppLocalizations.of(context)!.userHasBeenDeleted);
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();
               }else{
-                Fluttertoast.showToast(msg: "Failed to delete user, Try again");
+                Fluttertoast.showToast(msg: AppLocalizations.of(context)!.failedToDeleteUser);
                 Navigator.of(context).pop();
               }
             }),
@@ -333,7 +331,7 @@ class _VisitorDetailPageState extends State<VisitorDetailPage> {
 
   Future<Uint8List?> _takeScreenshot() async{
     Uint8List? uint8List;
-    ScreenshotController screenshotController = ScreenshotController();
+    // ScreenshotController screenshotController = ScreenshotController();
 
    /* try{
       uint8List = await screenshotController.captureFromWidget(

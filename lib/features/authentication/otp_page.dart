@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:portalixmx_guards_app/features/main_menu/main_menu_page.dart';
+import 'package:portalixmx_guards_app/generated/app_localizations.dart';
 import 'package:portalixmx_guards_app/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -28,17 +29,18 @@ class _OtpPageState extends State<OtpPage> {
         child: Column(
           spacing: 16,
           children: [
-            Text("2 Step Verification", style: AppTextStyles.headingTextStyle),
-            Text("Enter the 2 step verification code sent on your email address",textAlign: TextAlign.center, style: AppTextStyles.subHeadingTextStyle,),
+            Text(AppLocalizations.of(context)!.twoStepVerification, style: AppTextStyles.headingTextStyle),
+            Text(AppLocalizations.of(context)!.twoStepVerificationDescription,textAlign: TextAlign.center, style: AppTextStyles.subHeadingTextStyle,),
             const SizedBox(height: 16,),
-            AppTextField(textController: _otpController, hintText: "Email",),
+            AppTextField(textController: _otpController, hintText: AppLocalizations.of(context)!.email, textInputType: TextInputType.number,),
+
             const Spacer(),
             SizedBox(
               height: 50,
               width: double.infinity,
-              child: PrimaryBtn(onTap: _onVerifyOTPTap, btnText: "Submit", isLoading: provider.isVerifyingOTP,),
+              child: PrimaryBtn(onTap: _onVerifyOTPTap, btnText: AppLocalizations.of(context)!.submit, isLoading: provider.isVerifyingOTP,),
             ),
-            TextButton(onPressed: (){}, child: Text("Need Help", style: AppTextStyles.btnTextStyle,))
+            TextButton(onPressed: (){}, child: Text(AppLocalizations.of(context)!.needHelp, style: AppTextStyles.btnTextStyle,))
           ],
         ),
       ),
@@ -50,12 +52,11 @@ class _OtpPageState extends State<OtpPage> {
     if(otp.isEmpty){
       return;
     }
-    debugPrint("Otp: $otp");
     bool result = await provider.onVerifyOTPTap(otp: otp,);
     if(result){
       Navigator.of(context).push(MaterialPageRoute(builder: (_)=> MainMenuPage()));
     }else{
-      Fluttertoast.showToast(msg: "Invalid otp, Try again");
+      Fluttertoast.showToast(msg: AppLocalizations.of(context)!.invalidOTPMessage);
     }
   }
 }

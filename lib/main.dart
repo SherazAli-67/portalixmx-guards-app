@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:portalixmx_guards_app/features/main_menu/main_menu_page.dart';
 import 'package:portalixmx_guards_app/providers/auth_provider.dart';
 import 'package:portalixmx_guards_app/providers/home_provider.dart';
 import 'package:portalixmx_guards_app/providers/locale_provider.dart';
+import 'package:portalixmx_guards_app/providers/profile_provider.dart';
+import 'package:portalixmx_guards_app/providers/reports_provider.dart';
 import 'package:portalixmx_guards_app/providers/tab_change_provider.dart';
 import 'package:portalixmx_guards_app/res/app_colors.dart';
 import 'package:portalixmx_guards_app/res/app_constants.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'features/authentication/login_page.dart';
-import 'l10n/app_localizations.dart';
+import 'generated/app_localizations.dart';
 import 'l10n/l10n.dart';
 
 void main() {
@@ -19,7 +22,8 @@ void main() {
         ChangeNotifierProvider(create: (_)=> LocaledProvider()),
         ChangeNotifierProvider(create: (_)=> AuthProvider()),
         ChangeNotifierProvider(create: (_)=> HomeProvider()),
-
+        ChangeNotifierProvider(create: (_)=> ProfileProvider()),
+        ChangeNotifierProvider(create: (_)=> ReportProvider()),
       ], child: const MyApp(),)
   );
 }
@@ -36,6 +40,9 @@ class MyApp extends StatelessWidget {
         locale: provider.getLocale,
         localizationsDelegates: const [
           AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: L10n.all,
         theme: ThemeData(
@@ -48,7 +55,6 @@ class MyApp extends StatelessWidget {
           if(snapshot.hasData && snapshot.requireData){
             return MainMenuPage();
           }
-
           return LoginPage();
         })
     );

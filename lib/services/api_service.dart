@@ -60,12 +60,12 @@ class ApiService {
   }
 
 
-  Future<bool> uploadComplaintWithImages({required String complaintText, required List<File> images,}) async {
+  Future<bool> uploadReportWithImages({required String reportText, required List<File> images,}) async {
     bool result = false;
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String? token = sharedPreferences.getString("token");
     if(token != null){
-      final url = Uri.parse("https://admin.portalixmx.com/api/app-api/save-complain");
+      final url = Uri.parse("https://admin.portalixmx.com/api/app-api/save-report");
 
       var request = http.MultipartRequest('POST', url);
 
@@ -75,7 +75,7 @@ class ApiService {
       });
 
       // Add complaint text
-      request.fields['complaint'] = complaintText;
+      request.fields['report_text'] = reportText;
 
       // Add multiple image files with SAME key
       for (var image in images) {
@@ -93,10 +93,12 @@ class ApiService {
       }
       // Send request
       final response = await request.send();
+      final responseBody = await response.stream.bytesToString();
+
+      debugPrint("addReport api response: ${responseBody}");
       if(response.statusCode == 200){
         result = true;
       }
-
     }
 
     return result;

@@ -11,14 +11,15 @@ class ApiConstants {
   static const addVisitor = '/create-visitor';
   static const updateVisitor = '/update-visitor';
   static const visitorByID = '/visitor';
-  static const addComplaint = '/save-complain';
-  static const allComplaints = '/get-complain-list';
+  static const saveReport = '/save-report';
+  static const allReports = '/get-report-list';
   static const saveAccessControl = '/request-control';
   static const userAccessControlList = '/user-access-control-list';
   static const userProfile = '/user-porfile';
   static const updateProfile = '/update-profile';
   static const deleteGuest = '/delete-guest';
   static const deleteVisitor = '/delete-visitor';
-  static const deleteComplaint = '/delete-complain';
+  static const deleteReport = '/delete-report';
 
+  static const emergencyContactList = '/emergency-list';
 }

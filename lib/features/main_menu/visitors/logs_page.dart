@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:portalixmx_guards_app/features/main_menu/visitors/visitor_detail_page.dart';
+import 'package:portalixmx_guards_app/generated/app_localizations.dart';
 import 'package:portalixmx_guards_app/models/guest_api_response.dart';
 import 'package:portalixmx_guards_app/models/verified_user.dart';
 import 'package:portalixmx_guards_app/providers/home_provider.dart';
@@ -43,9 +44,9 @@ class LogsPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
               child: Text(
                 isToday
-                    ? 'TODAY'
+                    ? AppLocalizations.of(context)!.today
                     : isYesterday
-                        ? 'YESTERDAY'
+                        ? AppLocalizations.of(context)!.yesterday
                         : date.formatDate(),
                 style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: Colors.white),
               ),
@@ -86,11 +87,10 @@ class LogsItemWidget extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           tileColor: Colors.white,
           leading:
-          // imageUrl.isNotEmpty
-          //     ? CircleAvatar(
-          //         backgroundImage: CachedNetworkImageProvider(imageUrl, errorListener: (val) {}),
-          //       )
-          //     :
+          user.image.isNotEmpty
+              ? CircleAvatar(
+                  backgroundImage: CachedNetworkImageProvider(user.image, errorListener: (val) {}),
+                ) :
           const CircleAvatar(child: Icon(Icons.person)),
           title: Text(name, style: AppTextStyles.tileTitleTextStyle),
           subtitle: Text(logsOut ?? logsIn, style: AppTextStyles.tileSubtitleTextStyle),

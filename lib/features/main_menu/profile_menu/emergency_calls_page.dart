@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:portalixmx_guards_app/generated/app_localizations.dart';
+import 'package:portalixmx_guards_app/helpers/url_launcher_helper.dart';
+import 'package:portalixmx_guards_app/models/emergency_contact_response.dart';
+import 'package:portalixmx_guards_app/providers/profile_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../res/app_colors.dart';
 import '../../../res/app_textstyles.dart';
@@ -9,7 +14,7 @@ class EmergencyCallsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    final provider = Provider.of<ProfileProvider>(context);
     return BgGradientScreen(
         paddingFromTop: 50,
         child: Column(
@@ -19,7 +24,7 @@ class EmergencyCallsPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(onPressed: ()=> Navigator.of(context).pop(), icon: Icon(Icons.arrow_back_ios_rounded, color: Colors.white,)),
-                Text("Emergency Communication", style: AppTextStyles.regularTextStyle,),
+                Text(AppLocalizations.of(context)!.emergencyCommunication, style: AppTextStyles.regularTextStyle,),
                 const SizedBox(width: 40,)
               ],
             ),
@@ -34,8 +39,9 @@ class EmergencyCallsPage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 18, right: 18),
                   child: ListView.builder(
-                      itemCount: 10,
+                      itemCount: provider.emergencyContacts.length,
                       itemBuilder: (ctx, index){
+                        EmergencyContact contact = provider.emergencyContacts[index];
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 10.0),
                           child: Material(
@@ -44,6 +50,7 @@ class EmergencyCallsPage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(15)
                             ),
                             child: ListTile(
+                              onTap: ()=> UrlLauncherHelper.makingPhoneCall(phoneNum: contact.contactNumber),
                               contentPadding: EdgeInsets.only(top: 8, bottom: 8, left: 15, right: 10),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15)
@@ -56,8 +63,8 @@ class EmergencyCallsPage extends StatelessWidget {
                               title: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Police", style: AppTextStyles.tileTitleTextStyle,),
-                                  Text("+111", style: AppTextStyles.tileSubtitleTextStyle,)
+                                  Text(contact.name, style: AppTextStyles.tileTitleTextStyle,),
+                                  Text(contact.contactNumber, style: AppTextStyles.tileSubtitleTextStyle,)
                                 ],
                               ),
                               trailing: CircleAvatar(

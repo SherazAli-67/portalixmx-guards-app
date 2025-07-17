@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:portalixmx_guards_app/features/main_menu/reports/report_summary_page.dart';
-import 'package:portalixmx_guards_app/widgets/bg_gradient_screen.dart';
-
+import 'package:portalixmx_guards_app/providers/reports_provider.dart';
+import 'package:provider/provider.dart';
+import '../../../generated/app_localizations.dart';
 import '../../../res/app_colors.dart';
 import '../../../res/app_icons.dart';
 import '../../../res/app_textstyles.dart';
@@ -21,82 +21,63 @@ class AddReportPage extends StatefulWidget{
 
 class _AddReportPageState extends State<AddReportPage> {
   final TextEditingController _complaintTextEditingController = TextEditingController();
-  final TextEditingController _titleTextEditingController = TextEditingController();
-
   final List<XFile> _pickedImages =  [];
   @override
   void dispose() {
-    _titleTextEditingController.dispose();
     _complaintTextEditingController.dispose();
     super.dispose();
   }
   @override
   Widget build(BuildContext context) {
-    return BgGradientScreen(child: Column(
-      spacing: 15,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 16, top: 65),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 25),
+      child: Column(
+        spacing: 15,
+        children: [
+          Text(AppLocalizations.of(context)!.reports, style: AppTextStyles.bottomSheetHeadingTextStyle,),
+          const SizedBox(height: 10,),
+          AppTextField(textController: _complaintTextEditingController, hintText: AppLocalizations.of(context)!.writeAboutTheReport, fillColor: AppColors.fillColorGrey, maxLines: 5,),
+          Row(
+            spacing: 20,
             children: [
-              IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back, color: Colors.white,),),
-              Text("Add Reports", style: AppTextStyles.regularTextStyle),
-              const SizedBox(width: 40,)
+              Expanded(child: _buildUploadPicturesWidget(title: AppLocalizations.of(context)!.uploadPhotos, icon: AppIcons.icUploadPhotos, onTap: _onUploadPhotosTap)),
+              Expanded(child: _buildUploadPicturesWidget(title: AppLocalizations.of(context)!.openCamera, icon: AppIcons.icCamera, onTap: _onOpenCameraTap)),
+
             ],
           ),
-        ),
-        Expanded(child: Card(
-          elevation: 1,
-          margin: EdgeInsets.zero,
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30))
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 25),
-            child: Column(
-              spacing: 16,
-              children: [
-                const SizedBox(height: 10,),
-                AppTextField(textController: _titleTextEditingController, hintText: "Title", fillColor: AppColors.fillColorGrey,),
-                AppTextField(textController: _complaintTextEditingController, hintText: "Complaint", fillColor: AppColors.fillColorGrey, maxLines: 5,),
-                Row(
-                  spacing: 20,
+          Expanded(child: ListView.builder(
+              itemCount: _pickedImages.length,
+              itemBuilder: (ctx, index){
+                XFile image = _pickedImages[index];
+                return Column(
                   children: [
-                    Expanded(child: _buildUploadPicturesWidget(title: "Upload Photos", icon: AppIcons.icUploadPhotos, onTap: _onUploadPhotosTap)),
-                    Expanded(child: _buildUploadPicturesWidget(title: "Open Camera", icon: AppIcons.icCamera, onTap: _onOpenCameraTap)),
-
+                    Row(
+                      children: [
+                        Expanded(child: Text(AppLocalizations.of(context)!.imageUploaded(index+1), style: AppTextStyles.tileTitleTextStyle.copyWith(color: AppColors.primaryColor),)),
+                        IconButton(onPressed: (){
+                          _pickedImages.remove(image);
+                          setState(() {});
+                        }, icon: Icon(Icons.delete))
+                      ],
+                    ),
+                    if(index != _pickedImages.length-1)
+                      Divider()
                   ],
-                ),
-                Expanded(child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4, mainAxisSpacing: 20, crossAxisSpacing: 20),
-
-                    itemCount: _pickedImages.length,
-                    itemBuilder: (ctx, index){
-                      XFile image = _pickedImages[index];
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.file(File(image.path), fit: BoxFit.cover,),
-                      );
-                    })),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 18.0),
-                  child: SizedBox(
-                    height: 50,
-                    width: double.infinity,
-                    child: PrimaryBtn(onTap: (){
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx)=> ReportSummaryPage()));
-                    }, btnText: "Submit & Share to A  dmin"),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ))
-
-      ],
-    ));
+                );
+              })),
+          Consumer<ReportProvider>(builder: (ctx,provider, _){
+            return  Padding(
+              padding: const EdgeInsets.only(bottom: 18.0),
+              child: SizedBox(
+                height: 50,
+                width: double.infinity,
+                child: PrimaryBtn(onTap: _onAddComplaintTap, btnText: AppLocalizations.of(context)!.submit, isLoading: provider.addingReport,),
+              ),
+            );
+          })
+        ],
+      ),
+    );
   }
 
   Widget _buildUploadPicturesWidget({required String title, required VoidCallback onTap, required String icon}) {
@@ -134,6 +115,17 @@ class _AddReportPageState extends State<AddReportPage> {
     if(pickedFiles != null){
       _pickedImages.add(pickedFiles) ;
       setState(() {});
+    }
+  }
+
+  void _onAddComplaintTap()async{
+    String complaint = _complaintTextEditingController.text.trim();
+    List<File> files = _pickedImages.map((image)=> File(image.path)).toList();
+
+    final maintenanceProvider = Provider.of<ReportProvider>(context, listen: false);
+    bool result = await maintenanceProvider.addReport(files: files, complaint: complaint);
+    if(result){
+      Navigator.of(context).pop();
     }
   }
 }

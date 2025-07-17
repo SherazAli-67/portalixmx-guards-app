@@ -18,7 +18,7 @@ import 'app_localizations_es.dart';
 /// `supportedLocales` list. For example:
 ///
 /// ```dart
-/// import 'l10n/app_localizations.dart';
+/// import 'generated/app_localizations.dart';
 ///
 /// return MaterialApp(
 ///   localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -104,11 +104,11 @@ abstract class AppLocalizations {
   /// **'Portalixmx'**
   String get appTitle;
 
-  /// No description provided for @residentLogin.
+  /// No description provided for @guardLogin.
   ///
   /// In en, this message translates to:
-  /// **'Resident Login'**
-  String get residentLogin;
+  /// **'Guard Login'**
+  String get guardLogin;
 
   /// No description provided for @email.
   ///
@@ -137,20 +137,20 @@ abstract class AppLocalizations {
   /// No description provided for @welcomeMessage.
   ///
   /// In en, this message translates to:
-  /// **'Welcome {name}'**
+  /// **'Welcome {name}!'**
   String welcomeMessage(Object name);
 
-  /// No description provided for @regularVisitors.
+  /// No description provided for @visitors.
   ///
   /// In en, this message translates to:
-  /// **'Regular Visitors'**
-  String get regularVisitors;
+  /// **'Visitors'**
+  String get visitors;
 
-  /// No description provided for @guest.
+  /// No description provided for @logs.
   ///
   /// In en, this message translates to:
-  /// **'Guest'**
-  String get guest;
+  /// **'Logs'**
+  String get logs;
 
   /// No description provided for @accessRequests.
   ///
@@ -200,35 +200,47 @@ abstract class AppLocalizations {
   /// **'Need Help'**
   String get needHelp;
 
+  /// No description provided for @invalidOTPMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid otp, Try again'**
+  String get invalidOTPMessage;
+
   /// No description provided for @home.
   ///
   /// In en, this message translates to:
   /// **'Home'**
   String get home;
 
-  /// No description provided for @payments.
+  /// No description provided for @securityAlerts.
   ///
   /// In en, this message translates to:
-  /// **'Payments'**
-  String get payments;
+  /// **'Security Alerts'**
+  String get securityAlerts;
 
-  /// No description provided for @maintenance.
+  /// No description provided for @reports.
   ///
   /// In en, this message translates to:
-  /// **'Maintenance'**
-  String get maintenance;
-
-  /// No description provided for @access.
-  ///
-  /// In en, this message translates to:
-  /// **'Access'**
-  String get access;
+  /// **'Reports'**
+  String get reports;
 
   /// No description provided for @menu.
   ///
   /// In en, this message translates to:
   /// **'Menu'**
   String get menu;
+
+  /// No description provided for @guest.
+  ///
+  /// In en, this message translates to:
+  /// **'Guest'**
+  String get guest;
+
+  /// No description provided for @deleteVisitor.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Visitor'**
+  String get deleteVisitor;
 
   /// No description provided for @regularVisitor.
   ///
@@ -506,6 +518,12 @@ abstract class AppLocalizations {
   /// **'Add Guest'**
   String get addGuest;
 
+  /// No description provided for @editGuest.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Guest'**
+  String get editGuest;
+
   /// No description provided for @deleteComplaint.
   ///
   /// In en, this message translates to:
@@ -517,6 +535,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile information updated'**
   String get profileInfoUpdated;
+
+  /// No description provided for @guestVerified.
+  ///
+  /// In en, this message translates to:
+  /// **'Guest Verified'**
+  String get guestVerified;
+
+  /// No description provided for @carPlateNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Car Plate Number'**
+  String get carPlateNumber;
+
+  /// No description provided for @vehicleModel.
+  ///
+  /// In en, this message translates to:
+  /// **'Vehicle Model'**
+  String get vehicleModel;
+
+  /// No description provided for @time.
+  ///
+  /// In en, this message translates to:
+  /// **'Time'**
+  String get time;
+
+  /// No description provided for @userAddedMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'{user} has been added as a {userType}'**
+  String userAddedMsg(Object user, Object userType);
+
+  /// No description provided for @userUpdatedMsg.
+  ///
+  /// In en, this message translates to:
+  /// **'{user} has been updated'**
+  String userUpdatedMsg(Object user);
+
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
+  /// No description provided for @yesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get yesterday;
+
+  /// No description provided for @scanQRCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan QR Code'**
+  String get scanQRCode;
+
+  /// No description provided for @scanningWillStartAutomatically.
+  ///
+  /// In en, this message translates to:
+  /// **'Scanning will start automatically'**
+  String get scanningWillStartAutomatically;
+
+  /// No description provided for @userHasBeenDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'User has been deleted successfully'**
+  String get userHasBeenDeleted;
+
+  /// No description provided for @failedToDeleteUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to delete user, Try again'**
+  String get failedToDeleteUser;
+
+  /// No description provided for @writeAboutTheReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Write about the report'**
+  String get writeAboutTheReport;
+
+  /// No description provided for @imageUploaded.
+  ///
+  /// In en, this message translates to:
+  /// **'Image {imageNum}'**
+  String imageUploaded(Object imageNum);
+
+  /// No description provided for @aboutReport.
+  ///
+  /// In en, this message translates to:
+  /// **'About Report'**
+  String get aboutReport;
+
+  /// No description provided for @deleteReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Report'**
+  String get deleteReport;
+
+  /// No description provided for @emergencyCommunication.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency Communication'**
+  String get emergencyCommunication;
 }
 
 class _AppLocalizationsDelegate

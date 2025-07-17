@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:portalixmx_guards_app/res/app_constants.dart';
 import 'package:portalixmx_guards_app/services/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -41,7 +43,6 @@ class AuthProvider extends ChangeNotifier{
           String userID = map['userId'];
           String userName = map['name'];
 
-
           SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
           await sharedPreferences.setString("token", token);
           await sharedPreferences.setString("userID", userID);
@@ -56,11 +57,16 @@ class AuthProvider extends ChangeNotifier{
 
 
     }catch(e){
-      debugPrint("Error while logging in: ${e.toString()}");
+      String errorMessage = e.toString();
+      if(e is SocketException){
+        errorMessage = AppConstants.noInternetMsg;
+      }
+
+      Fluttertoast.showToast(msg: errorMessage);
     }
+
     _isLogging = false;
     notifyListeners();
-
     return result;
   }
 

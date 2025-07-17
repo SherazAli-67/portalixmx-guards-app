@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:portalixmx_guards_app/generated/app_localizations.dart';
 import 'package:portalixmx_guards_app/models/guest_api_response.dart';
 import 'package:portalixmx_guards_app/models/visitor_api_response.dart';
 import 'package:portalixmx_guards_app/providers/home_provider.dart';
@@ -29,7 +30,6 @@ class _GuestVerifiedPageState extends State<GuestVerifiedPage> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final provider = Provider.of<HomeProvider>(context, listen: false);
-      debugPrint("RawValue: ${widget.barcode.rawValue}");
 
       final map = jsonDecode(widget.barcode.rawValue!);
       String userID = map['userID'];
@@ -67,7 +67,7 @@ class _GuestVerifiedPageState extends State<GuestVerifiedPage> {
               IconButton(onPressed: ()=> Navigator.of(context).pop(), icon: Icon(Icons.arrow_back, color: Colors.white,)),
               const SizedBox(height: 50,),
               SvgPicture.asset(AppIcons.icGuestVerified),
-              Text("Guest Verified", style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500, color: Colors.white),)
+              Text(AppLocalizations.of(context)!.guestVerified, style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500, color: Colors.white),)
             ],
           ),
         ) : const SizedBox(),

@@ -3,11 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:portalixmx_guards_app/features/main_menu/visitors/add_visitor_page.dart';
 import 'package:portalixmx_guards_app/features/main_menu/visitors/logs_page.dart';
 import 'package:portalixmx_guards_app/features/main_menu/visitors/scan_qr_code_page.dart';
-import 'package:portalixmx_guards_app/l10n/app_localizations.dart';
 import 'package:portalixmx_guards_app/models/verified_user.dart';
 import 'package:portalixmx_guards_app/res/app_icons.dart';
 import 'package:provider/provider.dart';
-
+import '../../../generated/app_localizations.dart';
 import '../../../models/guest_api_response.dart';
 import '../../../models/visitor_api_response.dart';
 import '../../../providers/home_provider.dart';
@@ -24,12 +23,6 @@ class HomePage extends StatefulWidget{
 
 class _HomePageState extends State<HomePage> {
   int _selectedTab = 0;
-
-  @override
-  void initState() {
-    super.initState();
-
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                         child:  Icon(Icons.person, color: Colors.white,),
                       ),
                     ),
-                    Text("Welcome ${provider.userName}!", style: AppTextStyles.regularTextStyle,)
+                    Text(AppLocalizations.of(context)!.welcomeMessage(provider.userName), style: AppTextStyles.regularTextStyle,)
                   ],
                 ),
                 const SizedBox(height: 20,),
@@ -68,7 +61,7 @@ class _HomePageState extends State<HomePage> {
 
                             setState(() {});
                           }
-                        }, child: Text("Visitors", style: AppTextStyles.tabsTextStyle.copyWith(color: _selectedTab == 0 ?  Colors.white : AppColors.primaryColor),)),
+                        }, child: Text(AppLocalizations.of(context)!.visitors, style: AppTextStyles.tabsTextStyle.copyWith(color: _selectedTab == 0 ?  Colors.white : AppColors.primaryColor),)),
             
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -80,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                             // provider.getAllGuests();
                             setState(() {});
                           }
-                        }, child: Text("Logs", style: AppTextStyles.tabsTextStyle.copyWith(color: _selectedTab == 1 ?  Colors.white : AppColors.primaryColor),)),
+                        }, child: Text(AppLocalizations.of(context)!.logs, style: AppTextStyles.tabsTextStyle.copyWith(color: _selectedTab == 1 ?  Colors.white : AppColors.primaryColor),)),
             
                   ],
                 ),
@@ -98,8 +91,7 @@ class _HomePageState extends State<HomePage> {
                         return Card(
                           margin: EdgeInsets.only(bottom: 10),
                           child: ListTile(
-                            onTap: ()=> Navigator.of(context).push(MaterialPageRoute(builder: (_)=> VisitorDetailPage(visitor: user.user is Visitor ? user.user : null, guest: user.user is Guest ? user.user : null,)))
-                            ,
+                            onTap: ()=> Navigator.of(context).push(MaterialPageRoute(builder: (_)=> VisitorDetailPage(visitor: user.user is Visitor ? user.user : null, guest: user.user is Guest ? user.user : null,))),
                             contentPadding: EdgeInsets.only(left: 10),
                             leading: CircleAvatar(
                               backgroundColor: AppColors.btnColor,
@@ -122,27 +114,11 @@ class _HomePageState extends State<HomePage> {
                                   return [
                                     PopupMenuItem(
                                         value: 1,
-                                        child: Text("Delete Visitor"))
+                                        child: Text(AppLocalizations.of(context)!.deleteVisitor))
                                   ];
                                 }),
                           ),
                         );
-                      /*  return Card(
-                          margin: EdgeInsets.only(bottom: 10),
-                          child: ListTile(
-                            // onTap: ()=> Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> VisitorDetailPage())),
-                            contentPadding: EdgeInsets.only(left: 10),
-                            leading: CircleAvatar(
-                              backgroundColor: AppColors.btnColor,
-                              child: Center(
-                                child:  Icon(Icons.person, color: Colors.white,),
-                              ),
-                            ),
-                            title: Text("Name", style: AppTextStyles.tileTitleTextStyle,),
-                            subtitle: Text("Sep 20, 10:00 AM", style: AppTextStyles.tileSubtitleTextStyle,),
-            
-                          ),
-                        );*/
                       })
                   : LogsPage(),
                 )

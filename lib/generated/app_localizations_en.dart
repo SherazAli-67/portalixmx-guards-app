@@ -4,15 +4,15 @@ import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
 
-/// The translations for Spanish Castilian (`es`).
-class AppLocalizationsEs extends AppLocalizations {
-  AppLocalizationsEs([String locale = 'es']) : super(locale);
+/// The translations for English (`en`).
+class AppLocalizationsEn extends AppLocalizations {
+  AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'PortalixMX';
+  String get appTitle => 'Portalixmx';
 
   @override
-  String get residentLogin => 'Resident Login';
+  String get guardLogin => 'Guard Login';
 
   @override
   String get email => 'Email';
@@ -28,23 +28,23 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String welcomeMessage(Object name) {
-    return 'Bienvenido $name';
+    return 'Welcome $name!';
   }
 
   @override
-  String get regularVisitors => 'Visitantes Regulares';
+  String get visitors => 'Visitors';
 
   @override
-  String get guest => 'Invitado';
+  String get logs => 'Logs';
 
   @override
-  String get accessRequests => 'Solicitudes de Acceso';
+  String get accessRequests => 'Access Requests';
 
   @override
-  String get poolAccess => 'Acceso a la Piscina';
+  String get poolAccess => 'Pool Access';
 
   @override
-  String get add => 'Agregar';
+  String get add => 'Add';
 
   @override
   String get twoStepVerification => '2 Step Verification';
@@ -63,19 +63,25 @@ class AppLocalizationsEs extends AppLocalizations {
   String get needHelp => 'Need Help';
 
   @override
+  String get invalidOTPMessage => 'Invalid otp, Try again';
+
+  @override
   String get home => 'Home';
 
   @override
-  String get payments => 'Payments';
+  String get securityAlerts => 'Security Alerts';
 
   @override
-  String get maintenance => 'Maintenance';
-
-  @override
-  String get access => 'Access';
+  String get reports => 'Reports';
 
   @override
   String get menu => 'Menu';
+
+  @override
+  String get guest => 'Guest';
+
+  @override
+  String get deleteVisitor => 'Delete Visitor';
 
   @override
   String get regularVisitor => 'Regular Visitor';
@@ -218,8 +224,69 @@ class AppLocalizationsEs extends AppLocalizations {
   String get addGuest => 'Add Guest';
 
   @override
+  String get editGuest => 'Edit Guest';
+
+  @override
   String get deleteComplaint => 'Delete Complaint';
 
   @override
   String get profileInfoUpdated => 'Profile information updated';
+
+  @override
+  String get guestVerified => 'Guest Verified';
+
+  @override
+  String get carPlateNumber => 'Car Plate Number';
+
+  @override
+  String get vehicleModel => 'Vehicle Model';
+
+  @override
+  String get time => 'Time';
+
+  @override
+  String userAddedMsg(Object user, Object userType) {
+    return '$user has been added as a $userType';
+  }
+
+  @override
+  String userUpdatedMsg(Object user) {
+    return '$user has been updated';
+  }
+
+  @override
+  String get today => 'Today';
+
+  @override
+  String get yesterday => 'Yesterday';
+
+  @override
+  String get scanQRCode => 'Scan QR Code';
+
+  @override
+  String get scanningWillStartAutomatically =>
+      'Scanning will start automatically';
+
+  @override
+  String get userHasBeenDeleted => 'User has been deleted successfully';
+
+  @override
+  String get failedToDeleteUser => 'Failed to delete user, Try again';
+
+  @override
+  String get writeAboutTheReport => 'Write about the report';
+
+  @override
+  String imageUploaded(Object imageNum) {
+    return 'Image $imageNum';
+  }
+
+  @override
+  String get aboutReport => 'About Report';
+
+  @override
+  String get deleteReport => 'Delete Report';
+
+  @override
+  String get emergencyCommunication => 'Emergency Communication';
 }

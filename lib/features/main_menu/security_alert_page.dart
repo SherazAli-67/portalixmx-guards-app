@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portalixmx_guards_app/generated/app_localizations.dart';
 import 'package:portalixmx_guards_app/res/app_textstyles.dart';
 
 import '../../res/app_colors.dart';
@@ -14,7 +15,7 @@ class SecurityAlertPage extends StatelessWidget{
         child: Column(
           spacing: 24,
           children: [
-            Text("Security Alerts", style: AppTextStyles.regularTextStyle,),
+            Text(AppLocalizations.of(context)!.securityAlerts, style: AppTextStyles.regularTextStyle,),
             Expanded(child: ListView.builder(
                 itemCount: 10,
                 itemBuilder: (ctx, index){

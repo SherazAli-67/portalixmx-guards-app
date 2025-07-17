@@ -3,6 +3,7 @@ import 'package:portalixmx_guards_app/features/main_menu/visitors/home_page.dart
 import 'package:portalixmx_guards_app/features/main_menu/profile_menu/profile_menu_page.dart';
 import 'package:portalixmx_guards_app/features/main_menu/reports/reports_page.dart';
 import 'package:portalixmx_guards_app/features/main_menu/security_alert_page.dart';
+import 'package:portalixmx_guards_app/generated/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -30,10 +31,10 @@ class MainMenuPage extends StatelessWidget{
               unselectedLabelStyle: TextStyle(fontSize: 12, color: Colors.white),
 
               items: [
-                _buildBottomNavigationItemWidget(icon: AppIcons.icHomeMenu, label: 'Home', isSelected: provider.currentIndex == 0),
-                _buildBottomNavigationItemWidget(icon: AppIcons.icSecurityAlerts, label: 'Security Alerts', isSelected: provider.currentIndex == 1),
-                _buildBottomNavigationItemWidget(icon: AppIcons.icReports, label: 'Reports', isSelected: provider.currentIndex == 2),
-                _buildBottomNavigationItemWidget(icon: AppIcons.icMenu, label: 'Menu', isSelected: provider.currentIndex == 3),
+                _buildBottomNavigationItemWidget(icon: AppIcons.icHomeMenu, label: AppLocalizations.of(context)!.home, isSelected: provider.currentIndex == 0),
+                _buildBottomNavigationItemWidget(icon: AppIcons.icSecurityAlerts, label: AppLocalizations.of(context)!.securityAlerts, isSelected: provider.currentIndex == 1),
+                _buildBottomNavigationItemWidget(icon: AppIcons.icReports, label: AppLocalizations.of(context)!.reports, isSelected: provider.currentIndex == 2),
+                _buildBottomNavigationItemWidget(icon: AppIcons.icMenu, label: AppLocalizations.of(context)!.menu, isSelected: provider.currentIndex == 3),
 
               ]),
         ),
