@@ -62,7 +62,7 @@ class ReportsPage extends StatelessWidget{
                               padding: EdgeInsets.zero,
                               icon: Icon(Icons.more_vert_rounded),
                               onSelected: (val){
-                                provider.deleteReportByID(report);
+                                provider.deleteReportByID(report, context);
                               },
                               itemBuilder: (ctx){
                                 return [
@@ -74,29 +74,6 @@ class ReportsPage extends StatelessWidget{
                         ),
                       );
                     }))
-          /*  Expanded(child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (ctx, index){
-                  return Card(
-                    margin: EdgeInsets.only(bottom: 13),
-                    child: ListTile(
-                      // onTap: ()=> Navigator.of(context).push(MaterialPageRoute(builder: (ctx)=> VisitorDetailPage())),
-                      contentPadding: EdgeInsets.only(left: 10),
-                      leading: CircleAvatar(
-                        backgroundColor: index%2 == 0 ? AppColors.lightBtnColor : AppColors.lightPrimaryColor,
-                        child: Center(
-                          child: SvgPicture.asset(AppIcons.icReports,
-                            colorFilter: ColorFilter.mode(index % 2 == 0
-                                ? AppColors.btnColor
-                                : AppColors.primaryColor, BlendMode.srcIn),),
-                        ),
-                      ),
-                      title: Text("Report Name", style: AppTextStyles.tileTitleTextStyle,),
-                      subtitle: Text("Sep 20, 10:00 AM", style: AppTextStyles.tileSubtitleTextStyle,),
-
-                    ),
-                  );
-                }))*/
           ],
         ),
       ),

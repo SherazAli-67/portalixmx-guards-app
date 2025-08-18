@@ -157,8 +157,8 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
         AppTextField(textController: _carPlatNumberController, hintText: AppLocalizations.of(context)!.carPlateNumber, fillColor: AppColors.fillColorGrey, hintTextColor: AppColors.hintTextColor,borderColor: AppColors.borderColor,),
         AppTextField(textController: _vehicleModelController, hintText: AppLocalizations.of(context)!.vehicleModel, fillColor: AppColors.fillColorGrey, hintTextColor: AppColors.hintTextColor,borderColor: AppColors.borderColor,),
         AppTextField(textController: _colorController, hintText: AppLocalizations.of(context)!.color, fillColor: AppColors.fillColorGrey, hintTextColor: AppColors.hintTextColor,borderColor: AppColors.borderColor,),
-        FromDateAndTimeWidget(title: AppLocalizations.of(context)!.from,onDateTap: _onFromDateTap, onTimeTap: _onFromTimeTap, selectedDate: _selectedFromDateTime, selectedTime: _selectedFromTime),
-        FromDateAndTimeWidget(title: AppLocalizations.of(context)!.to,onDateTap: _onToDateTap, onTimeTap: _onToTimeTap, selectedDate: _selectedToDateTime, selectedTime: _selectedToTime),
+        FromDateAndTimeWidget(title: AppLocalizations.of(context)!.from, onDateTap: _onFromDateTap, onTimeTap: _onFromTimeTap, selectedDate: _selectedFromDateTime, selectedTime: _selectedFromTime),
+        FromDateAndTimeWidget(title: AppLocalizations.of(context)!.to, onDateTap: _onToDateTap, onTimeTap: _onToTimeTap, selectedDate: _selectedToDateTime, selectedTime: _selectedToTime),
       ],
     );
   }
@@ -174,7 +174,7 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 5,
           children: [
-            Text(AppData.getDayByID(dayID), style: AppTextStyles.regularTextStyle.copyWith(color: AppColors.btnColor),),
+            Text(AppData.getDayByID(context, dayID), style: AppTextStyles.regularTextStyle.copyWith(color: AppColors.btnColor),),
             Row(
               spacing: 20,
               children: [

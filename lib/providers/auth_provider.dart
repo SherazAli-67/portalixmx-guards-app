@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:portalixmx_guards_app/generated/app_localizations.dart';
 import 'package:portalixmx_guards_app/res/app_constants.dart';
 import 'package:portalixmx_guards_app/services/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,7 +19,7 @@ class AuthProvider extends ChangeNotifier{
   bool get isLogging  => _isLogging;
   bool get isVerifyingOTP  => _isVerifyingOTP;
 
-  Future<bool> onLoginTap({required String email, required String password}) async {
+  Future<bool> onLoginTap({required String email, required String password, required BuildContext context}) async {
     bool result = false;
     _isLogging = true;
     notifyListeners();
@@ -37,6 +38,7 @@ class AuthProvider extends ChangeNotifier{
         final Map<String,dynamic> map = jsonDecode(response.body)['data']['token']!;
         String role = map['role'];
         bool isGuard = role =='guards';
+        // bool isGuard = true;
         if(isGuard){
           result = true;
           String token = map['token'];
@@ -49,10 +51,10 @@ class AuthProvider extends ChangeNotifier{
           await sharedPreferences.setString("userName", userName);
 
         }else{
-          Fluttertoast.showToast(msg: "Invalid Guard Credentials");
+          Fluttertoast.showToast(msg: AppLocalizations.of(context)!.invalidLoginCredentialsMessage);
         }
       }else{
-        Fluttertoast.showToast(msg: "Invalid Login Credentials");
+        Fluttertoast.showToast(msg: AppLocalizations.of(context)!.invalidLoginCredentialsMessage);
       }
 
 

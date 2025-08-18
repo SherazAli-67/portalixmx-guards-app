@@ -289,4 +289,65 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get emergencyCommunication => 'Emergency Communication';
+
+  @override
+  String get show => 'Show';
+
+  @override
+  String get hide => 'Hide';
+
+  @override
+  String get deleteGuest => 'Delete Guest';
+
+  @override
+  String get monday => 'Monday';
+
+  @override
+  String get tuesday => 'Tuesday';
+
+  @override
+  String get wednesday => 'Wednesday';
+
+  @override
+  String get thursday => 'Thursday';
+
+  @override
+  String get friday => 'Friday';
+
+  @override
+  String get saturday => 'Saturday';
+
+  @override
+  String get sunday => 'Sunday';
+
+  @override
+  String get date => 'Date';
+
+  @override
+  String hasBeenEditedMessage(Object name) {
+    return '$name has been updated';
+  }
+
+  @override
+  String hasBeenAddedMessage(Object guestType, Object name) {
+    return '$name has been added as a $guestType';
+  }
+
+  @override
+  String accessRequestPending(Object accessTitle) {
+    return 'The request for $accessTitle is already in pending state';
+  }
+
+  @override
+  String accessRequestSubmitted(Object accessTitle) {
+    return 'The request for $accessTitle is submitted to Portalix Admin';
+  }
+
+  @override
+  String get invalidLoginCredentialsMessage =>
+      'Invalid guard\'s login credentials';
+
+  @override
+  String get reportDeletedSuccessfully =>
+      'Report has been deleted successfully';
 }

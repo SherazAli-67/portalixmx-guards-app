@@ -9,33 +9,33 @@ class AppLocalizationsEs extends AppLocalizations {
   AppLocalizationsEs([String locale = 'es']) : super(locale);
 
   @override
-  String get appTitle => 'PortalixMX';
+  String get appTitle => 'Portalixmx';
 
   @override
-  String get guardLogin => 'Guard Login';
+  String get guardLogin => 'Acceso de Guardia';
 
   @override
-  String get email => 'Email';
+  String get email => 'Correo electrónico';
 
   @override
-  String get password => 'Password';
+  String get password => 'Contraseña';
 
   @override
-  String get login => 'Login';
+  String get login => 'Iniciar sesión';
 
   @override
-  String get forgetPassword => 'Forget your password';
+  String get forgetPassword => 'Olvidaste tu contraseña';
 
   @override
   String welcomeMessage(Object name) {
-    return 'Bienvenido $name';
+    return 'Bienvenido $name!';
   }
 
   @override
-  String get visitors => 'Visitors';
+  String get visitors => 'Visitantes';
 
   @override
-  String get logs => 'Logs';
+  String get logs => 'Registros';
 
   @override
   String get accessRequests => 'Solicitudes de Acceso';
@@ -47,246 +47,308 @@ class AppLocalizationsEs extends AppLocalizations {
   String get add => 'Agregar';
 
   @override
-  String get twoStepVerification => '2 Step Verification';
+  String get twoStepVerification => 'Verificación en 2 Pasos';
 
   @override
   String get twoStepVerificationDescription =>
-      'Enter the 2 step verification code sent on your email address';
+      'Ingrese el código de verificación de 2 pasos enviado a su correo electrónico';
 
   @override
-  String get otp => 'OTP';
+  String get otp => 'Código OTP';
 
   @override
-  String get submit => 'Submit';
+  String get submit => 'Enviar';
 
   @override
-  String get needHelp => 'Need Help';
+  String get needHelp => 'Necesitas ayuda?';
 
   @override
-  String get invalidOTPMessage => 'Invalid otp, Try again';
+  String get invalidOTPMessage => 'OTP inválido, intenta de nuevo';
 
   @override
-  String get home => 'Home';
+  String get home => 'Inicio';
 
   @override
-  String get securityAlerts => 'Security Alerts';
+  String get securityAlerts => 'Alertas de Seguridad';
 
   @override
-  String get reports => 'Reports';
+  String get reports => 'Reportes';
 
   @override
-  String get menu => 'Menu';
+  String get menu => 'Menú';
 
   @override
   String get guest => 'Invitado';
 
   @override
-  String get deleteVisitor => 'Delete Visitor';
+  String get deleteVisitor => 'Eliminar Visitante';
 
   @override
-  String get regularVisitor => 'Regular Visitor';
+  String get regularVisitor => 'Visitante Frecuente';
 
   @override
-  String get requestedTime => 'REQUESTED TIME';
+  String get requestedTime => 'HORA SOLICITADA';
 
   @override
-  String get accessFor => 'Access For';
+  String get accessFor => 'Acceso Para';
 
   @override
-  String get teacher => 'Teacher';
+  String get teacher => 'Profesor';
 
   @override
-  String get accessApprovedDate => 'Access Approved Date';
+  String get accessApprovedDate => 'Fecha de Aprobación de Acceso';
 
   @override
-  String get contactNum => 'Contact No';
+  String get contactNum => 'Número de Contacto';
 
   @override
-  String get edit => 'Edit';
+  String get edit => 'Editar';
 
   @override
-  String get delete => 'Delete';
+  String get delete => 'Eliminar';
 
   @override
-  String get from => 'From';
+  String get from => 'De';
 
   @override
-  String get to => 'To';
+  String get to => 'A';
 
   @override
-  String get shareKey => 'Share Key';
+  String get shareKey => 'Compartir Clave';
 
   @override
-  String get qrCode => 'QR CODE';
+  String get qrCode => 'CÓDIGO QR';
 
   @override
-  String get paymentsAndBilling => 'Payments & Billing';
+  String get paymentsAndBilling => 'Pagos y Facturación';
 
   @override
-  String get currentService => 'Current Service';
+  String get currentService => 'Servicio Actual';
 
   @override
-  String get otherServices => 'Other Services';
+  String get otherServices => 'Otros Servicios';
 
   @override
-  String get serviceName => 'Service Name';
+  String get serviceName => 'Nombre del Servicio';
 
   @override
-  String get cleaningOfCommonAreas => 'Cleaning of common areas';
+  String get cleaningOfCommonAreas => 'Limpieza de áreas comunes';
 
   @override
-  String get garbageCollection => 'Garbage Collection';
+  String get garbageCollection => 'Recolección de basura';
 
   @override
-  String get complaint => 'Complaint';
+  String get complaint => 'Queja';
 
   @override
-  String get uploadPhotos => 'Upload Photos';
+  String get uploadPhotos => 'Subir Fotos';
 
   @override
-  String get openCamera => 'Open Camera';
+  String get openCamera => 'Abrir Cámara';
 
   @override
-  String get requestAccess => 'Request Access';
+  String get requestAccess => 'Solicitar Acceso';
 
   @override
-  String get viewProfile => 'View Profile';
+  String get viewProfile => 'Ver Perfil';
 
   @override
-  String get directory => 'Directory';
+  String get directory => 'Directorio';
 
   @override
-  String get communityCalendar => 'Community Calendar';
+  String get communityCalendar => 'Calendario Comunitario';
 
   @override
-  String get communityPolls => 'Community Polls';
+  String get communityPolls => 'Encuestas Comunitarias';
 
   @override
-  String get guards => 'Guards';
+  String get guards => 'Guardias';
 
   @override
-  String get carPooling => 'Car Pooling';
+  String get carPooling => 'Compartir Auto';
 
   @override
-  String get emergencyCalls => 'Emergency Calls';
+  String get emergencyCalls => 'Llamadas de Emergencia';
 
   @override
-  String get privacyPolicy => 'Privacy Policy';
+  String get privacyPolicy => 'Política de Privacidad';
 
   @override
-  String get logout => 'Logout';
+  String get logout => 'Cerrar sesión';
 
   @override
-  String get search => 'Search';
+  String get search => 'Buscar';
 
   @override
-  String get guardTracking => 'Guard Tracking';
+  String get guardTracking => 'Seguimiento de Guardias';
 
   @override
-  String get name => 'Name';
+  String get name => 'Nombre';
 
   @override
-  String get phone => 'Phone';
+  String get phone => 'Teléfono';
 
   @override
-  String get emergencyContacts => 'Emergency Contacts';
+  String get emergencyContacts => 'Contactos de Emergencia';
 
   @override
-  String get vehicleInformation => 'Vehicle Information';
+  String get vehicleInformation => 'Información del Vehículo';
 
   @override
-  String get vehicleName => 'Vehicle Name';
+  String get vehicleName => 'Nombre del Vehículo';
 
   @override
-  String get licensePlateNumber => 'License Plate Number';
+  String get licensePlateNumber => 'Número de Placa';
 
   @override
-  String get registrationNumber => 'Registration Number';
+  String get registrationNumber => 'Número de Registro';
 
   @override
-  String get update => 'Update';
+  String get update => 'Actualizar';
 
   @override
   String get color => 'Color';
 
   @override
-  String get profile => 'Profile';
+  String get profile => 'Perfil';
 
   @override
-  String get editProfile => 'Edit Profile';
+  String get editProfile => 'Editar Perfil';
 
   @override
   String updateYour(Object userInfo) {
-    return 'Update your $userInfo';
+    return 'Actualiza tu $userInfo';
   }
 
   @override
-  String get addGuest => 'Add Guest';
+  String get addGuest => 'Agregar Invitado';
 
   @override
-  String get editGuest => 'Edit Guest';
+  String get editGuest => 'Editar Invitado';
 
   @override
-  String get deleteComplaint => 'Delete Complaint';
+  String get deleteComplaint => 'Eliminar Queja';
 
   @override
-  String get profileInfoUpdated => 'Profile information updated';
+  String get profileInfoUpdated => 'Información de perfil actualizada';
 
   @override
-  String get guestVerified => 'Guest Verified';
+  String get guestVerified => 'Invitado Verificado';
 
   @override
-  String get carPlateNumber => 'Car Plate Number';
+  String get carPlateNumber => 'Número de Placa del Auto';
 
   @override
-  String get vehicleModel => 'Vehicle Model';
+  String get vehicleModel => 'Modelo del Vehículo';
 
   @override
-  String get time => 'Time';
+  String get time => 'Hora';
 
   @override
   String userAddedMsg(Object user, Object userType) {
-    return '$user has been added as a $userType';
+    return '$user ha sido agregado como $userType';
   }
 
   @override
   String userUpdatedMsg(Object user) {
-    return '$user has been updated';
+    return '$user ha sido actualizado';
   }
 
   @override
-  String get today => 'Today';
+  String get today => 'Hoy';
 
   @override
-  String get yesterday => 'Yesterday';
+  String get yesterday => 'Ayer';
 
   @override
-  String get scanQRCode => 'Scan QR Code';
+  String get scanQRCode => 'Escanear Código QR';
 
   @override
   String get scanningWillStartAutomatically =>
-      'Scanning will start automatically';
+      'El escaneo comenzará automáticamente';
 
   @override
-  String get userHasBeenDeleted => 'User has been deleted successfully';
+  String get userHasBeenDeleted => 'El usuario ha sido eliminado exitosamente';
 
   @override
-  String get failedToDeleteUser => 'Failed to delete user, Try again';
+  String get failedToDeleteUser =>
+      'Error al eliminar el usuario, intenta de nuevo';
 
   @override
-  String get writeAboutTheReport => 'Write about the report';
+  String get writeAboutTheReport => 'Escribe sobre el reporte';
 
   @override
   String imageUploaded(Object imageNum) {
-    return 'Image $imageNum';
+    return 'Imagen $imageNum';
   }
 
   @override
-  String get aboutReport => 'About Report';
+  String get aboutReport => 'Acerca del Reporte';
 
   @override
-  String get deleteReport => 'Delete Report';
+  String get deleteReport => 'Eliminar Reporte';
 
   @override
-  String get emergencyCommunication => 'Emergency Communication';
+  String get emergencyCommunication => 'Comunicación de Emergencia';
+
+  @override
+  String get show => 'Mostrar';
+
+  @override
+  String get hide => 'Ocultar';
+
+  @override
+  String get deleteGuest => 'Eliminar invitado';
+
+  @override
+  String get monday => 'Lunes';
+
+  @override
+  String get tuesday => 'Martes';
+
+  @override
+  String get wednesday => 'Miércoles';
+
+  @override
+  String get thursday => 'Jueves';
+
+  @override
+  String get friday => 'Viernes';
+
+  @override
+  String get saturday => 'Sábado';
+
+  @override
+  String get sunday => 'Domingo';
+
+  @override
+  String get date => 'Fecha';
+
+  @override
+  String hasBeenEditedMessage(Object name) {
+    return '$name ha sido actualizado';
+  }
+
+  @override
+  String hasBeenAddedMessage(Object guestType, Object name) {
+    return '$name ha sido agregado como $guestType';
+  }
+
+  @override
+  String accessRequestPending(Object accessTitle) {
+    return 'La solicitud de $accessTitle ya está en estado pendiente';
+  }
+
+  @override
+  String accessRequestSubmitted(Object accessTitle) {
+    return 'La solicitud de $accessTitle ha sido enviada al administrador de Portalix';
+  }
+
+  @override
+  String get invalidLoginCredentialsMessage =>
+      'Invalid guard\'s login credentials';
+
+  @override
+  String get reportDeletedSuccessfully =>
+      'El informe se ha eliminado correctamente';
 }

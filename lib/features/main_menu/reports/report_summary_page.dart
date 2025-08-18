@@ -4,7 +4,6 @@ import 'package:portalixmx_guards_app/generated/app_localizations.dart';
 import 'package:portalixmx_guards_app/models/report_model.dart';
 import 'package:portalixmx_guards_app/helpers/datetime_format_helpers.dart';
 import 'package:portalixmx_guards_app/res/app_constants.dart';
-import 'package:portalixmx_guards_app/res/app_icons.dart';
 import '../../../res/app_textstyles.dart';
 import '../../../widgets/bg_gradient_screen.dart';
 

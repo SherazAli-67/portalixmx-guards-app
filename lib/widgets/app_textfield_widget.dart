@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portalixmx_guards_app/generated/app_localizations.dart';
 
 import '../res/app_colors.dart';
 import '../res/app_textstyles.dart' show AppTextStyles;
@@ -49,7 +50,7 @@ class _AppTextFieldState extends State<AppTextField> {
           ),
           suffixIcon: widget.isPassword ? TextButton(
               onPressed: () => setState(() => hidePassword = !hidePassword),
-              child: Text(hidePassword ? "Show" :"Hide", style: AppTextStyles.regularTextStyle.copyWith(color: AppColors.primaryColor),)) : null,
+              child: Text(hidePassword ? AppLocalizations.of(context)!.show : AppLocalizations.of(context)!.hide, style: AppTextStyles.regularTextStyle.copyWith(color: AppColors.primaryColor),)) : null,
           focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(color: widget._borderColor)),
           fillColor: widget._fillColor,

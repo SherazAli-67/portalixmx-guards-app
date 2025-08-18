@@ -248,8 +248,6 @@ class EditProfileItemWidget extends StatelessWidget {
               return Text(contact, style: AppTextStyles.editProfileSubHeadingTextStyle,);
             }).toList(),
           )
-
-
         ],
       ),
     );

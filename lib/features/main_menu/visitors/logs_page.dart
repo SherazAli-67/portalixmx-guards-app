@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
@@ -51,7 +50,7 @@ class LogsPage extends StatelessWidget {
                 style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w700, color: Colors.white),
               ),
             ),
-            ...users.map((user) => LogsItemWidget(item: user)).toList(),
+            ...users.map((user) => LogsItemWidget(item: user)),
           ],
         );
       },
@@ -71,6 +70,7 @@ class LogsItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = item.user;
     final name = user.name;
+
     // final imageUrl = user is dynamic && user.imageUrl != null ? user.imageUrl : '';
     final logsIn = item.logsIn.formatDateTime();
     final logsOut = item.logsOut?.formatDateTime();
@@ -87,10 +87,10 @@ class LogsItemWidget extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           tileColor: Colors.white,
           leading:
-          user.image.isNotEmpty
+          /*user.image.isNotEmpty
               ? CircleAvatar(
                   backgroundImage: CachedNetworkImageProvider(user.image, errorListener: (val) {}),
-                ) :
+                ) :*/
           const CircleAvatar(child: Icon(Icons.person)),
           title: Text(name, style: AppTextStyles.tileTitleTextStyle),
           subtitle: Text(logsOut ?? logsIn, style: AppTextStyles.tileSubtitleTextStyle),

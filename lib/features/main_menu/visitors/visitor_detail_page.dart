@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -15,6 +16,7 @@ import 'package:share_plus/share_plus.dart';
 import '../../../app_data/app_data.dart';
 import '../../../generated/app_localizations.dart';
 import '../../../helpers/datetime_format_helpers.dart';
+import '../../../models/day_time_model.dart';
 import '../../../res/app_colors.dart';
 import '../../../res/app_icons.dart';
 import '../../../res/app_textstyles.dart';
@@ -257,9 +259,11 @@ class _VisitorDetailPageState extends State<VisitorDetailPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(AppData.days[index], style: AppTextStyles.visitorDetailTitleTextStyle,),
-                        Text(getVisitorTimeByIndex(index), style: AppTextStyles.visitorDetailSubtitleTextStyle,)
-                      ],
+                        Text(AppData.getDays(context)[index], style: AppTextStyles.visitorDetailTitleTextStyle,),
+                        Text(getVisitorTimeByIndex(index) != null
+                            ? DateTimeFormatHelpers.formatGuestTime(getVisitorTimeByIndex(index)!)
+                            : '',
+                          style: AppTextStyles.visitorDetailSubtitleTextStyle,)                      ],
                     ),
                     Container(
                       height: 1,
@@ -283,27 +287,29 @@ class _VisitorDetailPageState extends State<VisitorDetailPage> {
     );
   }
 
-  String getVisitorTimeByIndex(int index) {
+  DayTimeModel? getVisitorTimeByIndex(int index) {
+    // return null;
     switch(index){
       case 0:
-        return widget._visitor!.moTime ?? '';
+        return widget._visitor!.moTime != null && widget._visitor!.moTime!.isNotEmpty ? DayTimeModel.fromJson(jsonDecode(widget._visitor!.moTime!))  : null;
       case 1:
-        return widget._visitor!.tueTime ?? '';
+        return widget._visitor!.tueTime != null && widget._visitor!.tueTime!.isNotEmpty ? DayTimeModel.fromJson(jsonDecode(widget._visitor!.tueTime!))  : null;
       case 2:
-        return widget._visitor!.wedTime ?? '';
+        return widget._visitor!.wedTime != null && widget._visitor!.wedTime!.isNotEmpty ? DayTimeModel.fromJson(jsonDecode(widget._visitor!.wedTime!))  : null;
       case 3:
-        return widget._visitor!.thuTime ?? '';
+        return widget._visitor!.thuTime != null && widget._visitor!.thuTime!.isNotEmpty ? DayTimeModel.fromJson(jsonDecode(widget._visitor!.thuTime!))  : null;
       case 4:
-        return widget._visitor!.friTime ?? '';
+        return widget._visitor!.friTime != null && widget._visitor!.friTime!.isNotEmpty ? DayTimeModel.fromJson(jsonDecode(widget._visitor!.friTime!))  : null;
       case 5:
-        return widget._visitor!.satTime ?? '';
+        return widget._visitor!.satTime != null && widget._visitor!.satTime!.isNotEmpty ? DayTimeModel.fromJson(jsonDecode(widget._visitor!.satTime!))  : null;
       case 6:
-        return widget._visitor!.sunTime ?? '';
+        return widget._visitor!.sunTime != null && widget._visitor!.sunTime!.isNotEmpty ? DayTimeModel.fromJson(jsonDecode(widget._visitor!.sunTime!))  : null;
 
       default:
-        return  '';
+        return  null;
     }
   }
+
 
   void _shareQrCode(String? content) async{
     String userName = widget._guest != null ? widget._guest!.name : widget._visitor!.name;

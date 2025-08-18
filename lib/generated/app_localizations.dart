@@ -637,6 +637,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Emergency Communication'**
   String get emergencyCommunication;
+
+  /// No description provided for @show.
+  ///
+  /// In en, this message translates to:
+  /// **'Show'**
+  String get show;
+
+  /// No description provided for @hide.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide'**
+  String get hide;
+
+  /// No description provided for @deleteGuest.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Guest'**
+  String get deleteGuest;
+
+  /// No description provided for @monday.
+  ///
+  /// In en, this message translates to:
+  /// **'Monday'**
+  String get monday;
+
+  /// No description provided for @tuesday.
+  ///
+  /// In en, this message translates to:
+  /// **'Tuesday'**
+  String get tuesday;
+
+  /// No description provided for @wednesday.
+  ///
+  /// In en, this message translates to:
+  /// **'Wednesday'**
+  String get wednesday;
+
+  /// No description provided for @thursday.
+  ///
+  /// In en, this message translates to:
+  /// **'Thursday'**
+  String get thursday;
+
+  /// No description provided for @friday.
+  ///
+  /// In en, this message translates to:
+  /// **'Friday'**
+  String get friday;
+
+  /// No description provided for @saturday.
+  ///
+  /// In en, this message translates to:
+  /// **'Saturday'**
+  String get saturday;
+
+  /// No description provided for @sunday.
+  ///
+  /// In en, this message translates to:
+  /// **'Sunday'**
+  String get sunday;
+
+  /// No description provided for @date.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get date;
+
+  /// No description provided for @hasBeenEditedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} has been updated'**
+  String hasBeenEditedMessage(Object name);
+
+  /// No description provided for @hasBeenAddedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} has been added as a {guestType}'**
+  String hasBeenAddedMessage(Object guestType, Object name);
+
+  /// No description provided for @accessRequestPending.
+  ///
+  /// In en, this message translates to:
+  /// **'The request for {accessTitle} is already in pending state'**
+  String accessRequestPending(Object accessTitle);
+
+  /// No description provided for @accessRequestSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'The request for {accessTitle} is submitted to Portalix Admin'**
+  String accessRequestSubmitted(Object accessTitle);
+
+  /// No description provided for @invalidLoginCredentialsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid guard\'s login credentials'**
+  String get invalidLoginCredentialsMessage;
+
+  /// No description provided for @reportDeletedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Report has been deleted successfully'**
+  String get reportDeletedSuccessfully;
 }
 
 class _AppLocalizationsDelegate

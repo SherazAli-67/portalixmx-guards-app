@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:portalixmx_guards_app/generated/app_localizations.dart';
 import 'package:portalixmx_guards_app/models/report_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../res/api_constants.dart';
@@ -62,7 +63,7 @@ class ReportProvider extends ChangeNotifier {
     return null;
   }
 
-  Future<bool> deleteReportByID(Report report) async {
+  Future<bool> deleteReportByID(Report report, BuildContext context) async {
 
     bool result = false;
     _allReports.remove(report);
@@ -74,7 +75,7 @@ class ReportProvider extends ChangeNotifier {
         debugPrint("Report complaint api response: ${response.body}");
         if (response.statusCode == 200) {
           result = true;
-          Fluttertoast.showToast(msg: "Report is removed successfully");
+          Fluttertoast.showToast(msg: AppLocalizations.of(context)!.reportDeletedSuccessfully);
         }
       }
 

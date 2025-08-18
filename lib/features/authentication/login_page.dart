@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
-   bool result = await provider.onLoginTap(email: emailAddress, password: password);
+   bool result = await provider.onLoginTap(email: emailAddress, password: password, context: context);
     if(result){
       Navigator.of(context).push(MaterialPageRoute(builder: (_)=> OtpPage()));
     }

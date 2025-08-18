@@ -49,11 +49,12 @@ class _AddReportPageState extends State<AddReportPage> {
               itemCount: _pickedImages.length,
               itemBuilder: (ctx, index){
                 XFile image = _pickedImages[index];
+                String imagePath = image.path.split('/').last;
                 return Column(
                   children: [
                     Row(
                       children: [
-                        Expanded(child: Text(AppLocalizations.of(context)!.imageUploaded(index+1), style: AppTextStyles.tileTitleTextStyle.copyWith(color: AppColors.primaryColor),)),
+                        Expanded(child: Text(imagePath, style: AppTextStyles.tileTitleTextStyle.copyWith(color: AppColors.primaryColor),)),
                         IconButton(onPressed: (){
                           _pickedImages.remove(image);
                           setState(() {});
