@@ -47,7 +47,40 @@ class ProfileProvider extends ChangeNotifier{
     _initEmergencyContactList();
   }
 
-  Future<bool> updateUserProfile({required Map<String, dynamic> data})async {
+  Future<bool> updateUserProfile({required Map<String, dynamic> data, Function(UserModel)? onProfileUpdated})async {
+
+    bool result = false;
+    _updatingProfile = true;
+    notifyListeners();
+    try{
+      result = await _apiService.updateProfile(map: data);
+      final response = await _apiService.getRequest(endpoint: ApiConstants.userProfile);
+      if(response != null){
+        UserApiResponse userApiResponse = UserApiResponse.fromJson(jsonDecode(response.body));
+        _user = userApiResponse.data;
+        notifyListeners();
+        if(onProfileUpdated != null){
+          onProfileUpdated(_user!);
+        }
+      }
+      // final response = await _apiService.postRequestWithToken(endpoint: ApiConstants.updateProfile, data: data,);
+    }catch(e){
+      String errorMessage = e.toString();
+      if(e is PlatformException){
+        errorMessage = e.message!;
+      }else if(e is SocketException){
+        errorMessage = AppConstants.noInternetMsg;
+      }
+      Fluttertoast.showToast(msg: errorMessage);
+      debugPrint("Error while updating profile: $errorMessage");
+    }
+
+    _updatingProfile = false;
+    notifyListeners();
+    return result;
+  }
+
+ /* Future<bool> updateUserProfile({required Map<String, dynamic> data})async {
 
     bool result = false;
     _updatingProfile = true;
@@ -73,7 +106,7 @@ class ProfileProvider extends ChangeNotifier{
     _updatingProfile = false;
     notifyListeners();
     return result;
-  }
+  }*/
 
   void onLogoutTap(BuildContext context)async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

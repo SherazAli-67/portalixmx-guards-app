@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class UserApiResponse {
   final String message;
   final bool status;
@@ -75,7 +77,7 @@ class UserModel {
       createdAt: DateTime.parse(json['createdAt']),
       updatedAt: DateTime.parse(json['updatedAt']),
       v: json['__v'],
-      additionalDetails: AdditionalDetails.fromJson(json['additionalDetails']),
+      additionalDetails: json['additionalDetails'] is String ? AdditionalDetails.fromJson(jsonDecode(json['additionalDetails'])) : AdditionalDetails.fromJson(json['additionalDetails']),
     );
   }
 }

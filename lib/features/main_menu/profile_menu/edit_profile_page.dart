@@ -1,12 +1,17 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:portalixmx_guards_app/providers/home_provider.dart';
 import 'package:portalixmx_guards_app/widgets/bg_gradient_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../../generated/app_localizations.dart';
+import '../../../helpers/image_url_helper.dart';
+import '../../../models/user_api_response.dart';
 import '../../../providers/profile_provider.dart';
 import '../../../res/app_constants.dart';
 import '../../../res/app_icons.dart';
@@ -23,10 +28,11 @@ class EditProfilePage extends StatefulWidget{
 
 class _EditProfilePageState extends State<EditProfilePage> {
 
-  late String _userName;
-  late String _emailAddress;
+  String _userName = '';
+  String _emailAddress = '';
 
-  late String _userPhone;
+  String _userPhone = '';
+  XFile? _imagePicked;
 
   late ProfileProvider provider;
   @override
@@ -127,12 +133,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 Column(
                   spacing: 5,
                   children: [
-                    CircleAvatar(
-                      radius: 65,
-                      backgroundColor: Colors.white,
+                    GestureDetector(
+                      onTap: _onPickImageTap,
                       child: CircleAvatar(
-                        radius: 60,
-                        backgroundImage: CachedNetworkImageProvider(provider.user!.image.replaceAll('public', AppConstants.imageBaseUrl)),
+                        radius: 65,
+                        backgroundColor: Colors.white,
+                        child: CircleAvatar(
+                          radius: 60,
+                          backgroundImage: _imagePicked != null
+                              ? FileImage(File(_imagePicked!.path))
+                              : CachedNetworkImageProvider(ImageUrlHelper.getImageUrl(provider.user!.image)),
+                        ),
                       ),
                     ),
                     Text(_userName, style: AppTextStyles.bottomSheetHeadingTextStyle.copyWith(color: Colors.black),),
@@ -188,6 +199,33 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   Future<void> _onUpdateTap() async {
+    final provider = Provider.of<ProfileProvider>(context, listen: false);
+    final map = {
+      'name' : _userName,
+      'img' : _imagePicked != null ? _imagePicked!.path : "",
+      'mobile' : _userPhone,
+      "additionalDetails": {
+        "vehicleName": provider.user!.additionalDetails.vehicleName,
+        "color":  provider.user!.additionalDetails.color,
+        "licensePlate": provider.user!.additionalDetails.licensePlate,
+        "registrationNumber": provider.user!.additionalDetails.registrationNumber
+      },
+      "emergencyContacts": provider.user!.emergencyContacts
+    };
+
+    bool result = await provider.updateUserProfile(data: map, onProfileUpdated: _onProfileUpdated);
+    if(result){
+      Fluttertoast.showToast(msg: AppLocalizations.of(context)!.profileInfoUpdated);
+      Navigator.of(context).pop();
+    }
+  }
+
+  void _onProfileUpdated(UserModel user){
+    final homeProvider = Provider.of<HomeProvider>(context, listen: false);
+    homeProvider.setUserName(name: user.name);
+  }
+
+ /* Future<void> _onUpdateTap() async {
 
 
     final map = {
@@ -208,6 +246,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
       userProvider.setUserName(name: _userName);
       Fluttertoast.showToast(msg: AppLocalizations.of(context)!.profileInfoUpdated);
       Navigator.of(context).pop();
+    }
+  }*/
+
+  void _onPickImageTap()async{
+    ImagePicker imagePicker = ImagePicker();
+    XFile? selectedImage = await imagePicker.pickImage(source: ImageSource.gallery);
+    if(selectedImage != null){
+      _imagePicked = selectedImage;
+      setState(() {});
     }
   }
 }

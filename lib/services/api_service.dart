@@ -130,4 +130,49 @@ class ApiService {
     return { 'Authorization': 'Bearer $token',
       'Content-Type': 'application/json',};
   }
+
+  Future<bool> updateProfile({required Map<String, dynamic> map}) async {
+    bool result = false;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String? token = sharedPreferences.getString("token");
+    if(token != null){
+
+      final url = Uri.parse("https://admin.portalixmx.com/api/app-api/update-profile");
+      var request = http.MultipartRequest('POST', url);
+
+      request.headers.addAll({
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+      });
+      // Add complaint text
+      request.fields['name'] = map['name'];
+      request.fields['mobile'] = map['mobile'];
+      request.fields['additionalDetails'] = jsonEncode(map['additionalDetails']);
+      // request.fields['emergencyContacts'] = jsonEncode(map['emergencyContacts']);
+
+      if(map['img'] != null && map['img'].isNotEmpty){
+        final mimeType = lookupMimeType(map['img']) ?? 'image/jpeg';
+        final mimeSplit = mimeType.split('/');
+        request.files.add(
+          await http.MultipartFile.fromPath(
+            'img',
+            map['img'],
+            contentType: MediaType(mimeSplit[0], mimeSplit[1]),
+            filename: basename(map['img']),
+          ),
+        );
+      }
+
+      // Send request
+      final response = await request.send();
+      final responseBody = await response.stream.bytesToString();
+
+      debugPrint("update profile api response: $responseBody");
+      if(response.statusCode == 200){
+        result = true;
+      }
+    }
+
+    return result;
+  }
 }
