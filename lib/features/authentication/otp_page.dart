@@ -32,7 +32,7 @@ class _OtpPageState extends State<OtpPage> {
             Text(AppLocalizations.of(context)!.twoStepVerification, style: AppTextStyles.headingTextStyle),
             Text(AppLocalizations.of(context)!.twoStepVerificationDescription,textAlign: TextAlign.center, style: AppTextStyles.subHeadingTextStyle,),
             const SizedBox(height: 16,),
-            AppTextField(textController: _otpController, hintText: AppLocalizations.of(context)!.email, textInputType: TextInputType.number,),
+            AppTextField(textController: _otpController, hintText: AppLocalizations.of(context)!.otp, textInputType: TextInputType.number,),
 
             const Spacer(),
             SizedBox(
