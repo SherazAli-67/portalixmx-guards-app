@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:portalixmx_guards_app/providers/reports_provider.dart';
 import 'package:provider/provider.dart';
 import '../../../generated/app_localizations.dart';
+import '../../../helpers/image_compression_helper.dart';
 import '../../../res/app_colors.dart';
 import '../../../res/app_icons.dart';
 import '../../../res/app_textstyles.dart';
@@ -121,10 +122,13 @@ class _AddReportPageState extends State<AddReportPage> {
 
   void _onAddComplaintTap()async{
     String complaint = _complaintTextEditingController.text.trim();
-    List<File> files = _pickedImages.map((image)=> File(image.path)).toList();
+    List<File> originalFiles = _pickedImages.map((image)=> File(image.path)).toList();
+
+    // Compress images before uploading
+    List<File> compressedFiles = await ImageCompressionHelper.compressImages(originalFiles);
 
     final maintenanceProvider = Provider.of<ReportProvider>(context, listen: false);
-    bool result = await maintenanceProvider.addReport(files: files, complaint: complaint);
+    bool result = await maintenanceProvider.addReport(files: compressedFiles, complaint: complaint, context: context);
     if(result){
       Navigator.of(context).pop();
     }

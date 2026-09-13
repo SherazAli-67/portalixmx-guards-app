@@ -7,10 +7,11 @@ import 'package:portalixmx_guards_app/providers/locale_provider.dart';
 import 'package:portalixmx_guards_app/providers/profile_provider.dart';
 import 'package:portalixmx_guards_app/providers/reports_provider.dart';
 import 'package:portalixmx_guards_app/providers/tab_change_provider.dart';
+import 'package:portalixmx_guards_app/res/api_constants.dart';
 import 'package:portalixmx_guards_app/res/app_colors.dart';
 import 'package:portalixmx_guards_app/res/app_constants.dart';
+import 'package:portalixmx_guards_app/services/api_service.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'features/authentication/login_page.dart';
 import 'generated/app_localizations.dart';
 import 'l10n/l10n.dart';
@@ -62,10 +63,20 @@ class MyApp extends StatelessWidget {
 
 
   Future<bool> _isLoggedIn()async{
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    final response = await ApiService().getRequest(endpoint: ApiConstants.userProfile, );
+    debugPrint("User api response: ${response?.body}, statusCode: ${response?.statusCode}");
+    if(response != null){
+      if(response.statusCode == 200){
+        return true;
+      }else{
+        return false;
+      }
+    }
+    return false;
+    /*SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     bool isLoggedIn = sharedPreferences.getBool('isLoggedIn') ?? false;
 
-    return isLoggedIn;
+    return isLoggedIn;*/
   }
 }
 

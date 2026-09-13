@@ -114,5 +114,9 @@
   "hasBeenAddedMessage": "{name} ha sido agregado como {guestType}",
   "accessRequestPending" : "La solicitud de {accessTitle} ya está en estado pendiente",
   "accessRequestSubmitted" : "La solicitud de {accessTitle} ha sido enviada al administrador de Portalix",
-  "reportDeletedSuccessfully" : "El informe se ha eliminado correctamente"
+  "reportDeletedSuccessfully" : "El informe se ha eliminado correctamente",
+  "imageTooLarge" : "El archivo de imagen es demasiado grande. Por favor, inténtalo de nuevo.",
+  "uploadFailed" : "Error al subir el informe. Por favor, inténtalo de nuevo.",
+  "compressingImages" : "Comprimiendo imágenes...",
+  "reportSubmittedSuccessfully" : "Informe enviado correctamente"
 }

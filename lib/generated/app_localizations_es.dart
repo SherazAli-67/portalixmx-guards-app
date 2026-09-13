@@ -351,4 +351,18 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get reportDeletedSuccessfully =>
       'El informe se ha eliminado correctamente';
+
+  @override
+  String get imageTooLarge =>
+      'El archivo de imagen es demasiado grande. Por favor, inténtalo de nuevo.';
+
+  @override
+  String get uploadFailed =>
+      'Error al subir el informe. Por favor, inténtalo de nuevo.';
+
+  @override
+  String get compressingImages => 'Comprimiendo imágenes...';
+
+  @override
+  String get reportSubmittedSuccessfully => 'Informe enviado correctamente';
 }

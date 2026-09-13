@@ -739,6 +739,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Report has been deleted successfully'**
   String get reportDeletedSuccessfully;
+
+  /// No description provided for @imageTooLarge.
+  ///
+  /// In en, this message translates to:
+  /// **'Image file is too large. Please try again.'**
+  String get imageTooLarge;
+
+  /// No description provided for @uploadFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to upload report. Please try again.'**
+  String get uploadFailed;
+
+  /// No description provided for @compressingImages.
+  ///
+  /// In en, this message translates to:
+  /// **'Compressing images...'**
+  String get compressingImages;
+
+  /// No description provided for @reportSubmittedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Report submitted successfully'**
+  String get reportSubmittedSuccessfully;
 }
 
 class _AppLocalizationsDelegate

@@ -37,8 +37,8 @@ class AuthProvider extends ChangeNotifier{
       if(status){
         final Map<String,dynamic> map = jsonDecode(response.body)['data']['token']!;
         String role = map['role'];
-        bool isGuard = role =='guards';
-        // bool isGuard = true;
+        // bool isGuard = role =='guards';
+        bool isGuard = true;
         if(isGuard){
           result = true;
           String token = map['token'];

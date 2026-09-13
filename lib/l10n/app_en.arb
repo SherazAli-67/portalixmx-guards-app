@@ -115,5 +115,9 @@
   "accessRequestPending" : "The request for {accessTitle} is already in pending state",
   "accessRequestSubmitted" : "The request for {accessTitle} is submitted to Portalix Admin",
   "invalidLoginCredentialsMessage" : "Invalid guard's login credentials",
-  "reportDeletedSuccessfully" : "Report has been deleted successfully"
+  "reportDeletedSuccessfully" : "Report has been deleted successfully",
+  "imageTooLarge" : "Image file is too large. Please try again.",
+  "uploadFailed" : "Failed to upload report. Please try again.",
+  "compressingImages" : "Compressing images...",
+  "reportSubmittedSuccessfully" : "Report submitted successfully"
 }

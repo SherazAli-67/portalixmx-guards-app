@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:portalixmx_guards_app/generated/app_localizations.dart';
 import 'package:portalixmx_guards_app/models/report_model.dart';
@@ -21,7 +22,7 @@ class ReportProvider extends ChangeNotifier {
   ReportProvider(){
     getAllReports();
   }
-  Future<bool> addReport({required String complaint, required List<File> files}) async{
+  Future<bool> addReport({required String complaint, required List<File> files, required BuildContext context}) async{
     bool result = false;
     addingReport = true;
     notifyListeners();
@@ -30,11 +31,26 @@ class ReportProvider extends ChangeNotifier {
       result = await _apiService.uploadReportWithImages(reportText: complaint, images: files);
       addingReport = false;
       notifyListeners();
-      getAllReports();
+      
+      if(result){
+        Fluttertoast.showToast(msg: AppLocalizations.of(context)!.reportSubmittedSuccessfully);
+        getAllReports();
+      }
     }catch(e){
       addingReport = false;
       notifyListeners();
-      debugPrint("Error while logging in: ${e.toString()}");
+      debugPrint("Error while adding report: ${e.toString()}");
+      
+      // Handle specific error types
+      if(e is UploadException){
+        if(e.statusCode == 413){
+          Fluttertoast.showToast(msg: AppLocalizations.of(context)!.imageTooLarge);
+        } else {
+          Fluttertoast.showToast(msg: AppLocalizations.of(context)!.uploadFailed);
+        }
+      } else {
+        Fluttertoast.showToast(msg: AppLocalizations.of(context)!.uploadFailed);
+      }
     }
     return result;
   }

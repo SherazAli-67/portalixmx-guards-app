@@ -9,6 +9,17 @@ import 'package:mime/mime.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../res/api_constants.dart';
 
+/// Exception class for upload errors
+class UploadException implements Exception {
+  final int statusCode;
+  final String message;
+
+  UploadException({required this.statusCode, required this.message});
+
+  @override
+  String toString() => 'UploadException: Status $statusCode - $message';
+}
+
 class ApiService {
 
   // Singleton instance
@@ -96,12 +107,51 @@ class ApiService {
       final responseBody = await response.stream.bytesToString();
 
       debugPrint("addReport api response: ${responseBody}");
+      
       if(response.statusCode == 200){
         result = true;
+      } else {
+        // Throw exception with status code for error handling
+        throw UploadException(
+          statusCode: response.statusCode,
+          message: _extractErrorMessage(responseBody),
+        );
       }
     }
 
     return result;
+  }
+
+  /// Extracts error message from HTML or JSON response
+  String _extractErrorMessage(String responseBody) {
+    // Check if it's HTML (like nginx error pages)
+    if (responseBody.contains('<html>') || responseBody.contains('<title>')) {
+      // Try to extract title or h1 content
+      final titleMatch = RegExp(r'<title>(.*?)</title>', caseSensitive: false).firstMatch(responseBody);
+      if (titleMatch != null) {
+        return titleMatch.group(1) ?? 'Upload failed';
+      }
+      final h1Match = RegExp(r'<h1>(.*?)</h1>', caseSensitive: false).firstMatch(responseBody);
+      if (h1Match != null) {
+        return h1Match.group(1) ?? 'Upload failed';
+      }
+      return 'Upload failed';
+    }
+    
+    // Try to parse as JSON
+    try {
+      final json = jsonDecode(responseBody);
+      if (json is Map && json.containsKey('message')) {
+        return json['message'].toString();
+      }
+      if (json is Map && json.containsKey('error')) {
+        return json['error'].toString();
+      }
+    } catch (e) {
+      // Not JSON, return generic message
+    }
+    
+    return 'Upload failed';
   }
 
   Future<http.Response?> getRequest({required String endpoint,}) async {
